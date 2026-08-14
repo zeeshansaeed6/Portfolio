@@ -1,73 +1,124 @@
+import { useEffect } from "react";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger);
+
+const projects = [
+  {
+    name: "Food Delivery App",
+    category: "MERN Full-Stack",
+    tools: "MongoDB, Express.js, React, Node.js, REST APIs",
+    description:
+      "Full-stack food delivery platform supporting group ordering and synchronized split billing. Features a surplus food engine matching excess restaurant inventory with demand to cut food wastage.",
+    image: "/images/react.webp",
+    link: "https://github.com",
+  },
+  {
+    name: "Brain Tumor Detection",
+    category: "AI & Computer Vision",
+    tools: "Python, TensorFlow, OpenCV, Plotly",
+    description:
+      "CNN model classifying MRI scans for tumor presence with iterative model tuning. OpenCV preprocessing for noise reduction and interactive Plotly metric visualizations.",
+    image: "/images/node.webp",
+    link: "https://github.com",
+  },
+  {
+    name: "CollegeERP",
+    category: "ERP & Automation",
+    tools: "MERN Stack, Twilio API, MongoDB, Node.js",
+    description:
+      "Centralized Educational Resource Planning system digitizing student records, attendance, and administrative operations with automated Twilio SMS alert integration.",
+    image: "/images/mongo.webp",
+    link: "https://github.com",
+  },
+  {
+    name: "Generative AI Suite",
+    category: "LLMs & Smart UX",
+    tools: "Generative AI, LLMs, FastAPI, React, Supabase",
+    description:
+      "Intelligent application suite integrating LLMs and generative AI tools to power context-aware user workflows with scalable system architecture.",
+    image: "/images/express.webp",
+    link: "https://github.com",
+  },
+  {
+    name: "Data Analytics Engine",
+    category: "Analytics & Systems",
+    tools: "Python, Pandas, NumPy, Plotly, AWS",
+    description:
+      "Production-style analytics pipeline and interactive dashboards from enterprise case studies, optimized for high data throughput and actionable insights.",
+    image: "/images/javascript.webp",
+    link: "https://github.com",
+  },
+];
 
 const Work = () => {
-  useGSAP(() => {
-  let translateX: number = 0;
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      let translateX: number = 0;
 
-  function setTranslateX() {
-    const box = document.getElementsByClassName("work-box");
-    const rectLeft = document
-      .querySelector(".work-container")!
-      .getBoundingClientRect().left;
-    const rect = box[0].getBoundingClientRect();
-    const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-    let padding: number =
-      parseInt(window.getComputedStyle(box[0]).padding) / 2;
-    translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-  }
+      function setTranslateX() {
+        const box = document.getElementsByClassName("work-box");
+        if (!box || box.length === 0) return;
+        const workContainer = document.querySelector(".work-container");
+        if (!workContainer) return;
+        const rectLeft = workContainer.getBoundingClientRect().left;
+        const rect = box[0].getBoundingClientRect();
+        const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
+        let padding: number =
+          parseInt(window.getComputedStyle(box[0]).padding) / 2;
+        translateX =
+          rect.width * box.length - (rectLeft + parentWidth) + padding;
+      }
 
-  setTranslateX();
+      setTranslateX();
 
-  let timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work-section",
-      start: "top top",
-      end: `+=${translateX}`, // Use actual scroll width
-      scrub: true,
-      pin: true,
-      id: "work",
-    },
-  });
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".work-section",
+          start: "top top",
+          end: () => `+=${translateX}`,
+          scrub: true,
+          pin: true,
+          id: "work",
+          invalidateOnRefresh: true,
+        },
+      });
 
-  timeline.to(".work-flex", {
-    x: -translateX,
-    ease: "none",
-  });
+      timeline.to(".work-flex", {
+        x: () => -translateX,
+        ease: "none",
+      });
+    });
 
-  // Clean up (optional, good practice)
-  return () => {
-    timeline.kill();
-    ScrollTrigger.getById("work")?.kill();
-  };
-}, []);
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
         <h2>
-          My <span>Work</span>
+          My <span>Projects</span>
         </h2>
         <div className="work-flex">
-          {[...Array(6)].map((_value, index) => (
+          {projects.map((project, index) => (
             <div className="work-box" key={index}>
               <div className="work-info">
                 <div className="work-title">
                   <h3>0{index + 1}</h3>
 
                   <div>
-                    <h4>Project Name</h4>
-                    <p>Category</p>
+                    <h4>{project.name}</h4>
+                    <p>{project.category}</p>
                   </div>
                 </div>
-                <h4>Tools and features</h4>
-                <p>Javascript, TypeScript, React, Threejs</p>
+                <h4>Tools & Features</h4>
+                <p>{project.tools}</p>
+                <p className="work-desc">{project.description}</p>
               </div>
-              <WorkImage image="/images/placeholder.webp" alt="" />
+              <WorkImage image={project.image} alt={project.name} link={project.link} />
             </div>
           ))}
         </div>

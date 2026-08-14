@@ -85,6 +85,13 @@
 .work-info > p {
   width: 90%;
 }
+.work-info p.work-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #c9c8c8;
+  margin-top: 12px;
+  font-weight: 300;
+}
 .work-image {
   display: flex;
   width: 100%;

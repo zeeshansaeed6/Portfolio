@@ -10,28 +10,46 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
+  useEffect(() => {
+    if (percent >= 100) {
+      const timer1 = setTimeout(() => {
+        setLoaded(true);
+        const timer2 = setTimeout(() => {
+          setIsLoaded(true);
+        }, 800);
+        return () => clearTimeout(timer2);
+      }, 400);
+      return () => clearTimeout(timer1);
+    }
+  }, [percent]);
+
+  // Safety fallback: if anything hangs, reveal page after 3.5s
+  useEffect(() => {
+    const safetyTimer = setTimeout(() => {
       setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
-  }
+      setIsLoaded(true);
+    }, 3500);
+    return () => clearTimeout(safetyTimer);
+  }, []);
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
-          setIsLoading(false);
-        }, 900);
-      }
-    });
-  }, [isLoaded]);
+    if (isLoaded) {
+      setClicked(true);
+      const timer = setTimeout(() => {
+        import("./utils/initialFX")
+          .then((module) => {
+            if (module && module.initialFX) {
+              module.initialFX();
+            }
+          })
+          .catch((err) => console.warn("initialFX error:", err))
+          .finally(() => {
+            setIsLoading(false);
+          });
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoaded, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;
@@ -46,7 +64,7 @@ const Loading = ({ percent }: { percent: number }) => {
     <>
       <div className="loading-header">
         <a href="/#" className="loader-title" data-cursor="disable">
-          Logo
+          ZEESHAN
         </a>
         <div className={`loaderGame ${clicked && "loader-out"}`}>
           <div className="loaderGame-container">
@@ -62,8 +80,10 @@ const Loading = ({ percent }: { percent: number }) => {
       <div className="loading-screen">
         <div className="loading-marquee">
           <Marquee>
-            <span> A Creative Developer</span> <span>A Creative Designer</span>
-            <span> A Creative Developer</span> <span>A Creative Designer</span>
+            <span> FULL-STACK SOFTWARE ENGINEER</span>
+            <span> MERN STACK DEVELOPER</span>
+            <span> GENERATIVE AI & LLMS</span>
+            <span> SCALABLE ARCHITECTURE</span>
           </Marquee>
         </div>
         <div

@@ -4,51 +4,82 @@ import { smoother } from "../Navbar";
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  smoother.paused(false);
-  document.getElementsByTagName("main")[0].classList.add("main-active");
+  try {
+    if (smoother && typeof smoother.paused === "function") {
+      smoother.paused(false);
+    }
+  } catch (e) {
+    console.warn("ScrollSmoother:", e);
+  }
+
+  const main = document.querySelector("main") || document.querySelector(".main-body");
+  if (main) {
+    main.classList.add("main-active");
+  }
+
   gsap.to("body", {
     backgroundColor: "#0b080c",
     duration: 0.5,
-    delay: 1,
+    delay: 0.5,
   });
 
-  var landingText = new SplitText(
-    [".landing-info h3", ".landing-intro h2", ".landing-intro h1"],
-    {
-      type: "chars,lines",
-      linesClass: "split-line",
+  try {
+    const introEl = document.querySelector(".landing-intro h1");
+    if (introEl) {
+      const landingText = new SplitText(
+        [".landing-info h3", ".landing-intro h2", ".landing-intro h1"],
+        {
+          type: "chars,lines",
+          linesClass: "split-line",
+        }
+      );
+      gsap.fromTo(
+        landingText.chars,
+        { opacity: 0, y: 80, filter: "blur(5px)" },
+        {
+          opacity: 1,
+          duration: 1.2,
+          filter: "blur(0px)",
+          ease: "power3.inOut",
+          y: 0,
+          stagger: 0.025,
+          delay: 0.3,
+        }
+      );
     }
-  );
-  gsap.fromTo(
-    landingText.chars,
-    { opacity: 0, y: 80, filter: "blur(5px)" },
-    {
-      opacity: 1,
-      duration: 1.2,
-      filter: "blur(0px)",
-      ease: "power3.inOut",
-      y: 0,
-      stagger: 0.025,
-      delay: 0.3,
-    }
-  );
+  } catch (e) {
+    console.warn("SplitText intro:", e);
+  }
 
-  let TextProps = { type: "chars,lines", linesClass: "split-h2" };
+  const TextProps = { type: "chars,lines", linesClass: "split-h2" };
 
-  var landingText2 = new SplitText(".landing-h2-info", TextProps);
-  gsap.fromTo(
-    landingText2.chars,
-    { opacity: 0, y: 80, filter: "blur(5px)" },
-    {
-      opacity: 1,
-      duration: 1.2,
-      filter: "blur(0px)",
-      ease: "power3.inOut",
-      y: 0,
-      stagger: 0.025,
-      delay: 0.3,
+  try {
+    if (document.querySelector(".landing-h2-info")) {
+      const landingText2 = new SplitText(".landing-h2-info", TextProps);
+      const landingText3 = new SplitText(".landing-h2-info-1", TextProps);
+      const landingText4 = new SplitText(".landing-h2-1", TextProps);
+      const landingText5 = new SplitText(".landing-h2-2", TextProps);
+
+      gsap.fromTo(
+        landingText2.chars,
+        { opacity: 0, y: 80, filter: "blur(5px)" },
+        {
+          opacity: 1,
+          duration: 1.2,
+          filter: "blur(0px)",
+          ease: "power3.inOut",
+          y: 0,
+          stagger: 0.025,
+          delay: 0.3,
+        }
+      );
+
+      LoopText(landingText2, landingText3);
+      LoopText(landingText4, landingText5);
     }
-  );
+  } catch (e) {
+    console.warn("SplitText loop:", e);
+  }
 
   gsap.fromTo(
     ".landing-info-h2",
@@ -71,17 +102,11 @@ export function initialFX() {
       delay: 0.1,
     }
   );
-
-  var landingText3 = new SplitText(".landing-h2-info-1", TextProps);
-  var landingText4 = new SplitText(".landing-h2-1", TextProps);
-  var landingText5 = new SplitText(".landing-h2-2", TextProps);
-
-  LoopText(landingText2, landingText3);
-  LoopText(landingText4, landingText5);
 }
 
 function LoopText(Text1: SplitText, Text2: SplitText) {
-  var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+  if (!Text1 || !Text2 || !Text1.chars || !Text2.chars) return;
+  const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
   const delay = 4;
   const delay2 = delay * 2 + 1;
 

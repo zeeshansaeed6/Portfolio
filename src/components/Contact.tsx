@@ -10,15 +10,19 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Email</h4>
             <p>
-              <a href="mailto:example@mail.com" data-cursor="disable">
-                example@mail.com
+              <a href="mailto:saeedzeeshan2003@gmail.com" data-cursor="disable">
+                saeedzeeshan2003@gmail.com
               </a>
             </p>
             <h4>Phone</h4>
             <p>
-              <a href="tel:+9199999999" data-cursor="disable">
-                +91 99999 99999
+              <a href="tel:+917569748912" data-cursor="disable">
+                +91 7569748912
               </a>
+            </p>
+            <h4>Location</h4>
+            <p className="contact-location">
+              Hyderabad, Telangana, India
             </p>
           </div>
           <div className="contact-box">
@@ -26,6 +30,7 @@ const Contact = () => {
             <a
               href="https://github.com"
               target="_blank"
+              rel="noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
@@ -34,34 +39,35 @@ const Contact = () => {
             <a
               href="https://www.linkedin.com"
               target="_blank"
+              rel="noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
               Linkedin <MdArrowOutward />
             </a>
             <a
-              href="https://x.com"
+              href="https://leetcode.com"
               target="_blank"
+              rel="noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
-              Twitter <MdArrowOutward />
+              LeetCode (Active) <MdArrowOutward />
             </a>
             <a
-              href="https://www.instagram.com"
-              target="_blank"
+              href="#"
               data-cursor="disable"
               className="contact-social"
             >
-              Instagram <MdArrowOutward />
+              Portfolio <MdArrowOutward />
             </a>
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Moncy Yohannan</span>
+              Designed and Developed <br /> by <span>Zeeshan Saeed</span>
             </h2>
             <h5>
-              <MdCopyright /> 2024
+              <MdCopyright /> 2026
             </h5>
           </div>
         </div>
