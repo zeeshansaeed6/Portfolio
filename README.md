@@ -1,65 +1,56 @@
-# My Portfolio Website - Overview 🚀
+# Zeeshan Saeed - Portfolio Website 🚀
 
-This repository contains the open-source version of my personal portfolio website.  
-Feel free to explore the code and use it for learning and inspiration.
-
----
-
-## ⚠️ Usage Notice
-
-This project is shared for learning purposes only.
-
-Please do NOT:
-- Clone or replicate the full website or design
-- Repost it with minor content changes
-- Use this project for commercial/client work
-- Create tutorials or content using this exact project
-
-If you use parts of the code, you must provide proper credit linking back to the original repository.
-
-Build your own version — don’t just copy.
-
-— Moncy Yohannan
+Welcome to the personal portfolio of **Zeeshan Saeed** — Full-Stack Software Engineer passionate about building next-generation web applications, full-stack systems, Generative AI integration, and algorithmic problem-solving.
 
 ---
 
-## 🛠️ Instructions
+## 👨‍💻 About Me
 
-I have modified the GSAP Club plugins using trial versions.  
-⚠️ Note: Trial plugins cannot be used for production or hosting.
-
-For official GSAP Club plugins, refer here:  
-https://gsap.com/docs/v3/Installation/
-
----
-
-## ⚙️ Tech Stack
-
-React • TypeScript • GSAP • Three.js • WebGL • HTML • CSS • JavaScript
+- **Location:** Hyderabad, Telangana, India
+- **Email:** saeedzeeshan2003@gmail.com
+- **Phone:** +91 7569748912
+- **Education:** Osmania University, Hyderabad — Bachelor's Degree (Semester 5)
+- **Profiles:** [LinkedIn](https://linkedin.com) • [GitHub](https://github.com) • [LeetCode (Active)](https://leetcode.com)
 
 ---
 
-## 🎨 Assets Usage
+## 🛠️ Technical Stack
 
-Some 3D assets included in this repository are free to use for learning purposes.
-
-However:
-
-- The original 3D avatar used on my live portfolio is NOT included in this repository
-- That avatar is a custom asset created over ~1 month
-- It is not open source and not available for reuse
-
-Any usage, extraction, or redistribution of that avatar from my live website is strictly prohibited.
+- **Core Competencies:** Generative AI, Large Language Model (LLM) Integration, Data Structures & Algorithms (DSA), System Architecture & Scalability
+- **Languages:** Python, JavaScript, C, TypeScript
+- **Frameworks & Libraries:** React, Node.js, Express.js, FastAPI, TensorFlow, OpenCV, Plotly, Pandas, NumPy
+- **Databases:** MongoDB, Supabase
+- **Tools & Cloud:** Git/GitHub, AWS, Oracle Cloud, Google Cloud, Microsoft Azure, Postman
 
 ---
 
-![Protfolio-Preview](https://github.com/user-attachments/assets/3c4557e7-6392-4928-b8a9-7b2476ef4edd)
+## 🏆 Featured Projects
+
+1. **Full-Stack Food Delivery Application** (MERN Stack, REST APIs)
+   - Group ordering & synchronized split billing, surplus food engine to match excess inventory with demand and minimize food waste.
+2. **Brain Tumor Detection Model** (Python, TensorFlow, OpenCV, Plotly)
+   - Deep learning CNN for MRI scan tumor classification, OpenCV image preprocessing, and interactive Plotly performance metrics visualization.
+3. **CollegeERP** (MERN Stack, Twilio API)
+   - Centralized ERP for student records, attendance, and administrative workflows with automated Twilio SMS alert integration.
+4. **Generative AI & LLM Suite** (FastAPI, React, Supabase)
+   - AI-driven dynamic application workflows with context-aware intelligent agent assistance.
+5. **Data Analytics & High-Scale Systems** (Deloitte Job Simulation, Python, Pandas, Plotly)
+   - Business intelligence, interactive analytics dashboards, and scalable data pipeline architecture.
 
 ---
 
-## 📄 License
+## 📜 Licenses & Certifications (10+)
 
-This project is licensed under the Personal Portfolio License (PPL) v1.0.
+- Oracle Cloud Infrastructure Certified AI Foundation Associate
+- AWS Certified Machine Learning
+- Google Cloud AI
+- Microsoft Azure AI Essentials Professional Certificate (Microsoft & LinkedIn)
+- Generative AI Professional Certificate (Snowflake)
+- Generative AI Foundation Certificate (Microsoft)
+- Deloitte Australia Data Analytics Job Simulation Certificate
+- AWS Cloud Practitioner Essentials
+- Generative AI Foundations Certificate (upGrad)
+- NPTEL Certifications
+- MERN Full-Stack Course (AccioJob)
 
-See the LICENSE file for full details
 
