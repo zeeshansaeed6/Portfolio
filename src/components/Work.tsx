@@ -8,6 +8,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    name: "OmniMarket",
+    category: "MERN Multi-Vendor Hub",
+    tools: "MERN Stack, Stripe Escrow, Multi-Currency, Redux, RBAC",
+    description:
+      "Commercial-grade multi-vendor marketplace featuring Stripe 3D-secure escrow payments, item-level split vendor fulfillment, dynamic 9-currency conversion, and dedicated vendor & admin management hubs.",
+    image: "/images/react.webp",
+    link: "https://github.com/zeeshansaeed6/E-CommWeb",
+  },
+  {
+    name: "SerpentAI Ultra",
+    category: "Multimodal AI & HealthTech",
+    tools: "MERN Stack, Gemini Vision AI, WebRTC, Geolocation API",
+    description:
+      "Multimodal AI vision suite for real-time snake species identification, venom risk triage scoring, low-light photo enhancement, and auto-dispatched GPS antivenom hospital routing.",
+    image: "/images/node.webp",
+    link: "https://github.com/zeeshansaeed6/snake-species-detection",
+  },
+  {
     name: "Food Delivery App",
     category: "MERN Full-Stack",
     tools: "MongoDB, Express.js, React, Node.js, REST APIs",
@@ -22,7 +40,7 @@ const projects = [
     tools: "Python, TensorFlow, OpenCV, Plotly",
     description:
       "CNN model classifying MRI scans for tumor presence with iterative model tuning. OpenCV preprocessing for noise reduction and interactive Plotly metric visualizations.",
-    image: "/images/node.webp",
+    image: "/images/node2.webp",
     link: "https://github.com",
   },
   {
@@ -107,7 +125,7 @@ const Work = () => {
             <div className="work-box" key={index}>
               <div className="work-info">
                 <div className="work-title">
-                  <h3>0{index + 1}</h3>
+                  <h3>{index + 1 < 10 ? `0${index + 1}` : index + 1}</h3>
 
                   <div>
                     <h4>{project.name}</h4>

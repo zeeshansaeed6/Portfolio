@@ -10,7 +10,7 @@ Welcome to the personal portfolio of **Zeeshan Saeed** — Full-Stack Software E
 - **Email:** saeedzeeshan2003@gmail.com
 - **Phone:** +91 7569748912
 - **Education:** Osmania University, Hyderabad — Bachelor's Degree (Semester 5)
-- **Profiles:** [LinkedIn](https://linkedin.com) • [GitHub](https://github.com) • [LeetCode (Active)](https://leetcode.com)
+- **Profiles:** [LinkedIn](https://linkedin.com) • [GitHub](https://github.com/zeeshansaeed6) • [LeetCode (Active)](https://leetcode.com)
 
 ---
 
@@ -19,22 +19,26 @@ Welcome to the personal portfolio of **Zeeshan Saeed** — Full-Stack Software E
 - **Core Competencies:** Generative AI, Large Language Model (LLM) Integration, Data Structures & Algorithms (DSA), System Architecture & Scalability
 - **Languages:** Python, JavaScript, C, TypeScript
 - **Frameworks & Libraries:** React, Node.js, Express.js, FastAPI, TensorFlow, OpenCV, Plotly, Pandas, NumPy
-- **Databases:** MongoDB, Supabase
-- **Tools & Cloud:** Git/GitHub, AWS, Oracle Cloud, Google Cloud, Microsoft Azure, Postman
+- **Databases:** MongoDB, Supabase, MySQL
+- **Tools & Cloud:** Git/GitHub, Docker, AWS, Oracle Cloud, Google Cloud, Microsoft Azure, Postman
 
 ---
 
 ## 🏆 Featured Projects
 
-1. **Full-Stack Food Delivery Application** (MERN Stack, REST APIs)
+1. **OmniMarket — Commercial Multi-Vendor E-Commerce** (MERN Stack, Stripe Escrow, Redux) • [Repository](https://github.com/zeeshansaeed6/E-CommWeb)
+   - Commercial-grade marketplace with Stripe 3D-Secure escrow payments, item-level split vendor fulfillment, dynamic 9-currency conversion, and dedicated vendor/admin management hubs.
+2. **SerpentAI Ultra — AI Snake Species Detection & Venom Safety Suite** (MERN Stack, Gemini Vision AI) • [Repository](https://github.com/zeeshansaeed6/snake-species-detection)
+   - Multimodal AI vision platform with real-time species recognition, envenomation triage risk scoring, low-light photo enhancement, and GPS auto-dispatched antivenom hospital routing.
+3. **Full-Stack Food Delivery Application** (MERN Stack, REST APIs)
    - Group ordering & synchronized split billing, surplus food engine to match excess inventory with demand and minimize food waste.
-2. **Brain Tumor Detection Model** (Python, TensorFlow, OpenCV, Plotly)
+4. **Brain Tumor Detection Model** (Python, TensorFlow, OpenCV, Plotly)
    - Deep learning CNN for MRI scan tumor classification, OpenCV image preprocessing, and interactive Plotly performance metrics visualization.
-3. **CollegeERP** (MERN Stack, Twilio API)
+5. **CollegeERP** (MERN Stack, Twilio API)
    - Centralized ERP for student records, attendance, and administrative workflows with automated Twilio SMS alert integration.
-4. **Generative AI & LLM Suite** (FastAPI, React, Supabase)
+6. **Generative AI & LLM Suite** (FastAPI, React, Supabase)
    - AI-driven dynamic application workflows with context-aware intelligent agent assistance.
-5. **Data Analytics & High-Scale Systems** (Deloitte Job Simulation, Python, Pandas, Plotly)
+7. **Data Analytics & High-Scale Systems** (Deloitte Job Simulation, Python, Pandas, Plotly)
    - Business intelligence, interactive analytics dashboards, and scalable data pipeline architecture.
 
 ---

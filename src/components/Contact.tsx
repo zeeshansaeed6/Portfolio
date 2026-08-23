@@ -28,7 +28,7 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com"
+              href="https://github.com/zeeshansaeed6"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
