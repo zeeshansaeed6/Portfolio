@@ -26,13 +26,13 @@ const projects = [
     link: "https://github.com/zeeshansaeed6/snake-species-detection",
   },
   {
-    name: "Food Delivery App",
-    category: "MERN Full-Stack",
-    tools: "MongoDB, Express.js, React, Node.js, REST APIs",
+    name: "FoodDash",
+    category: "Food Delivery & Social Dining",
+    tools: "Vite, Vanilla JS, Node.js, Express.js, Three.js",
     description:
-      "Full-stack food delivery platform supporting group ordering and synchronized split billing. Features a surplus food engine matching excess restaurant inventory with demand to cut food wastage.",
+      "Next-generation food delivery platform blending e-commerce with social media, gamification, and WebGL 3D graphics. Features AI-powered dining intelligence and an immersive 3D food inspector.",
     image: "/images/react.webp",
-    link: "https://github.com",
+    link: "https://github.com/zeeshansaeed6/FoodDash",
   },
   {
     name: "Brain Tumor Detection",

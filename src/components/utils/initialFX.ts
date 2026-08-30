@@ -60,8 +60,10 @@ export function initialFX() {
       const landingText4 = new SplitText(".landing-h2-1", TextProps);
       const landingText5 = new SplitText(".landing-h2-2", TextProps);
 
+      gsap.set([landingText3.chars, landingText5.chars], { opacity: 0 });
+
       gsap.fromTo(
-        landingText2.chars,
+        [landingText2.chars, landingText4.chars],
         { opacity: 0, y: 80, filter: "blur(5px)" },
         {
           opacity: 1,
