@@ -8,6 +8,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    name: "Aegis Ultimate",
+    category: "Zero-Telemetry Browser & Search",
+    tools: "Electron, Chromium, Node.js, BM25 Indexing, Gemini API, Ollama, Tor",
+    description:
+      "Sovereign zero-telemetry private search engine & Chromium desktop browser suite featuring sub-5ms BM25 local indexing, isolated multi-tab proxy browsing, Perplexity-style cited AI synthesis, autonomous web crawler studio, and Google-parity instant tools.",
+    image: "/images/aegis.png",
+    link: "https://github.com/zeeshansaeed6/Aegis-Ultimate",
+  },
+  {
     name: "OmniMarket",
     category: "MERN Multi-Vendor Hub",
     tools: "MERN Stack, Stripe Escrow, Multi-Currency, Redux, RBAC",
