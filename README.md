@@ -10,7 +10,7 @@ Welcome to the personal portfolio of **Zeeshan Saeed** — Full-Stack Software E
 - **Email:** saeedzeeshan2003@gmail.com
 - **Phone:** +91 7569748912
 - **Education:** Osmania University, Hyderabad — Bachelor's Degree (Semester 5)
-- **Profiles:** [LinkedIn](https://linkedin.com) • [GitHub](https://github.com/zeeshansaeed6) • [LeetCode (Active)](https://leetcode.com)
+- **Profiles:** [LinkedIn](https://linkedin.com) • [GitHub](https://github.com/zeeshansaeed6) • [LeetCode (Active)](https://leetcode.com/u/zeeshansaeed06/)
 
 ---
 

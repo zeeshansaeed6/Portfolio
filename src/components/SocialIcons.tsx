@@ -72,7 +72,7 @@ const SocialIcons = () => {
           </a>
         </span>
         <span>
-          <a href="https://leetcode.com" target="_blank" rel="noreferrer" aria-label="LeetCode (Active)">
+          <a href="https://leetcode.com/u/zeeshansaeed06/" target="_blank" rel="noreferrer" aria-label="LeetCode (Active)">
             <SiLeetcode />
           </a>
         </span>
