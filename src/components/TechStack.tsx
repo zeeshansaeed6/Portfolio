@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import {
   BallCollider,
   Physics,
@@ -66,57 +65,57 @@ const techBrands: TechBrand[] = [
 
 function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 512;
+  canvas.width = 512;
+  canvas.height = 256;
   const ctx = canvas.getContext("2d")!;
 
   // Dark ceramic ball background
   ctx.fillStyle = "#0c0a12";
-  ctx.fillRect(0, 0, 1024, 512);
+  ctx.fillRect(0, 0, 512, 256);
 
   const img = new Image();
   img.src = `data:image/svg+xml;utf8,${encodeURIComponent(brand.svg)}`;
 
   const render = () => {
     ctx.fillStyle = "#0c0a12";
-    ctx.fillRect(0, 0, 1024, 512);
+    ctx.fillRect(0, 0, 512, 256);
 
-    [256, 768].forEach((cx) => {
-      const cy = 256;
+    [128, 384].forEach((cx) => {
+      const cy = 128;
 
       // Color aura glow
-      const grad = ctx.createRadialGradient(cx, cy - 10, 20, cx, cy - 10, 180);
+      const grad = ctx.createRadialGradient(cx, cy - 6, 10, cx, cy - 6, 95);
       grad.addColorStop(0, brand.color + "55");
       grad.addColorStop(0.5, brand.color + "18");
       grad.addColorStop(1, "transparent");
       ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.arc(cx, cy - 10, 180, 0, Math.PI * 2);
+      ctx.arc(cx, cy - 6, 95, 0, Math.PI * 2);
       ctx.fill();
 
       // Dark badge plate
       ctx.fillStyle = "#16131e";
       ctx.strokeStyle = brand.color + "AA";
-      ctx.lineWidth = 5;
+      ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.arc(cx, cy - 16, 120, 0, Math.PI * 2);
+      ctx.arc(cx, cy - 8, 62, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
 
       // Draw real SVG icon
       if (img.complete && img.naturalWidth !== 0) {
-        const iconSize = 140;
-        ctx.drawImage(img, cx - iconSize / 2, cy - iconSize / 2 - 16, iconSize, iconSize);
+        const iconSize = 72;
+        ctx.drawImage(img, cx - iconSize / 2, cy - iconSize / 2 - 8, iconSize, iconSize);
       }
 
       // Brand Label Text
-      ctx.font = "900 30px Geist, sans-serif";
+      ctx.font = "900 16px Geist, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#ffffff";
       ctx.shadowColor = brand.color;
-      ctx.shadowBlur = 10;
-      ctx.fillText(brand.name, cx, cy + 76);
+      ctx.shadowBlur = 6;
+      ctx.fillText(brand.name, cx, cy + 40);
       ctx.shadowBlur = 0;
     });
   };
@@ -134,10 +133,10 @@ function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
   return texture;
 }
 
-const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+const sphereGeometry = new THREE.SphereGeometry(1, 24, 24);
 
 const sphereScales = [0.95, 1.05, 1.15, 0.9, 1.0, 1.1];
-const spheres = [...Array(27)].map((_, i) => ({
+const spheres = [...Array(16)].map((_, i) => ({
   scale: sphereScales[i % sphereScales.length],
   brandIndex: i % techBrands.length,
 }));
@@ -241,29 +240,24 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
-    };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
-    window.addEventListener("scroll", handleScroll);
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsActive(entry.isIntersecting);
+        });
+      },
+      { rootMargin: "150px" }
+    );
+
+    observer.observe(el);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
     };
   }, []);
 
@@ -285,7 +279,7 @@ const TechStack = () => {
   }, []);
 
   return (
-    <div className="techstack">
+    <div className="techstack" ref={containerRef}>
       <div className="techstack-header">
         <h2>
           My <span>Tech Stack</span>
@@ -297,7 +291,8 @@ const TechStack = () => {
 
       <Canvas
         shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: true }}
+        dpr={[1, 1.5]}
+        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
         onCreated={(state) => (state.gl.toneMappingExposure = 1.45)}
         className="tech-canvas"
@@ -329,9 +324,6 @@ const TechStack = () => {
           environmentIntensity={0.65}
           environmentRotation={[0, 4, 2]}
         />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0b080c" aoRadius={2} intensity={1.2} />
-        </EffectComposer>
       </Canvas>
     </div>
   );
