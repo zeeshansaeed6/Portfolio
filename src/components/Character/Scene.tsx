@@ -62,15 +62,17 @@ const Scene = () => {
             mixer = animations.mixer;
             let character = gltf.scene;
             setChar(character);
+            const prevModels = scene.children.filter((c) => c.type === "Group");
+            prevModels.forEach((m) => scene.remove(m));
             scene.add(character);
-            headBone = character.getObjectByName("spine006") || null;
+            headBone =
+              character.getObjectByName("spine.006") ||
+              character.getObjectByName("spine006") ||
+              null;
             screenLight = character.getObjectByName("screenlight") || null;
-            progress.loaded().then(() => {
-              light.turnOnLights();
-              animations.startIntro();
-            });
             light.turnOnLights();
             animations.startIntro();
+            progress.loaded();
             window.addEventListener("resize", () =>
               handleResize(renderer, camera, canvasDiv, character)
             );

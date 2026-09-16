@@ -39,8 +39,10 @@ const setCharacter = (
             resolve(gltf);
             setCharTimeline(character, camera);
             setAllTimeline();
-            character!.getObjectByName("footR")!.position.y = 3.36;
-            character!.getObjectByName("footL")!.position.y = 3.36;
+            const footR = character?.getObjectByName("foot.R") || character?.getObjectByName("footR");
+            const footL = character?.getObjectByName("foot.L") || character?.getObjectByName("footL");
+            if (footR) footR.position.y = 3.36;
+            if (footL) footL.position.y = 3.36;
             dracoLoader.dispose();
           },
           undefined,

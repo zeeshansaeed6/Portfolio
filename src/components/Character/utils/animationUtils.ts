@@ -12,7 +12,6 @@ const setAnimations = (gltf: GLTF) => {
     const introAction = mixer.clipAction(introClip!);
     introAction.setLoop(THREE.LoopOnce, 1);
     introAction.clampWhenFinished = true;
-    introAction.play();
     const clipNames = ["key1", "key2", "key5", "key6"];
     clipNames.forEach((name) => {
       const clip = THREE.AnimationClip.findByName(gltf.animations, name);
