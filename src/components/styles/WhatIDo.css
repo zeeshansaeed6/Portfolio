@@ -9,14 +9,14 @@
   width: var(--cWidth);
   max-width: 1920px;
   margin: auto;
-  z-index: 9;
+  z-index: 15;
 }
 .what-box {
   width: 50%;
   display: flex;
   justify-content: center;
   position: relative;
-  z-index: 9;
+  z-index: 15;
 }
 .what-box h2 {
   font-size: calc(4vw + 25px);
@@ -35,9 +35,10 @@
 .what-box-in {
   flex-direction: column;
   height: 560px;
-  margin-left: 180px;
+  margin-left: 40px;
   position: relative;
   display: none;
+  z-index: 15;
 }
 .what-content {
   width: 480px;
@@ -47,6 +48,11 @@
   position: relative;
   padding: 28px 40px;
   box-sizing: border-box;
+  background: rgba(14, 11, 20, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 6px;
+  z-index: 15;
 }
 
 .what-noTouch:hover,
