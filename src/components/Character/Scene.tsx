@@ -66,11 +66,11 @@ const Scene = () => {
             headBone = character.getObjectByName("spine006") || null;
             screenLight = character.getObjectByName("screenlight") || null;
             progress.loaded().then(() => {
-              setTimeout(() => {
-                light.turnOnLights();
-                animations.startIntro();
-              }, 2500);
+              light.turnOnLights();
+              animations.startIntro();
             });
+            light.turnOnLights();
+            animations.startIntro();
             window.addEventListener("resize", () =>
               handleResize(renderer, camera, canvasDiv, character)
             );
@@ -114,23 +114,12 @@ const Scene = () => {
         landingDiv.addEventListener("touchstart", onTouchStart);
         landingDiv.addEventListener("touchend", onTouchEnd);
       }
-      let isVisible = true;
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            isVisible = entry.isIntersecting;
-          });
-        },
-        { rootMargin: "100px" }
-      );
-      if (canvasDiv.current) {
-        observer.observe(canvasDiv.current);
-      }
 
       let animId: number;
       const animate = () => {
         animId = requestAnimationFrame(animate);
-        if (!isVisible) return;
+        const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        if (scrollY > window.innerHeight * 2.5) return;
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -151,7 +140,6 @@ const Scene = () => {
       animate();
       return () => {
         cancelAnimationFrame(animId);
-        observer.disconnect();
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();

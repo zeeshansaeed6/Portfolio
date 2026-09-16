@@ -31,17 +31,23 @@ const setAnimations = (gltf: GLTF) => {
       typingAction.play();
       typingAction.timeScale = 1.2;
     }
+    mixer.update(0.01);
   }
   function startIntro() {
     const introClip = gltf.animations.find(
       (clip) => clip.name === "introAnimation"
     );
-    const introAction = mixer.clipAction(introClip!);
-    introAction.clampWhenFinished = true;
-    introAction.reset().play();
+    if (introClip) {
+      const introAction = mixer.clipAction(introClip);
+      introAction.clampWhenFinished = true;
+      introAction.reset().play();
+    }
+    mixer.update(0.01);
     setTimeout(() => {
       const blink = gltf.animations.find((clip) => clip.name === "Blink");
-      mixer.clipAction(blink!).play().fadeIn(0.5);
+      if (blink) {
+        mixer.clipAction(blink).play().fadeIn(0.5);
+      }
     }, 2500);
   }
   function hover(gltf: GLTF, hoverDiv: HTMLDivElement) {
