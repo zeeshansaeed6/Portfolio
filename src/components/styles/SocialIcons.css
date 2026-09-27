@@ -30,18 +30,22 @@
   height: 50px;
   position: relative;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .social-icons a {
-  --siLeft: 50%;
-  --siTop: 50%;
   position: absolute;
-  left: var(--siLeft, 50%);
-  top: var(--siTop, 50%);
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 23px;
-  will-change: left, top;
-  transition: transform 0.3s ease-out;
+  transform: translate(var(--siLeft, 0px), var(--siTop, 0px));
+  will-change: transform;
+  transition: color 0.3s ease, transform 0.15s ease-out;
 }
 .resume-button {
   position: absolute;

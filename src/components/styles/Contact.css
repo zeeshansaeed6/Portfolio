@@ -31,6 +31,25 @@
   font-size: 16px;
   font-weight: 300;
 }
+.contact-email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.contact-email-link:hover {
+  color: var(--accentColor);
+}
+.contact-email-icon {
+  font-size: 20px;
+  color: var(--accentColor);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.contact-email-link:hover .contact-email-icon {
+  transform: scale(1.2);
+}
 a.contact-social {
   font-size: 25px;
   border-bottom: 1px solid #ccc;

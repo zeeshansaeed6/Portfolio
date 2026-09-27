@@ -1,0 +1,176 @@
+.email-toast-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999999;
+  max-width: 420px;
+  width: calc(100vw - 40px);
+  pointer-events: auto;
+  animation: emailToastSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes emailToastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.email-toast {
+  position: relative;
+  background: rgba(14, 11, 18, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(194, 164, 255, 0.35);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(194, 164, 255, 0.15);
+  color: #eae5ec;
+  overflow: hidden;
+  font-family: "Geist", sans-serif;
+}
+
+.email-toast-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.email-toast-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+.email-toast-check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(194, 164, 255, 0.2);
+  color: var(--accentColor);
+  font-size: 14px;
+}
+
+.email-toast-close {
+  background: transparent;
+  border: none;
+  color: #8e8896;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.email-toast-close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.email-toast-address {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accentColor);
+  margin: 0 0 4px 0;
+  word-break: break-all;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.email-toast-status {
+  font-size: 12px;
+  color: #9e98a8;
+  margin: 0 0 14px 0;
+  line-height: 1.4;
+}
+
+.email-toast-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.email-toast-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.email-toast-btn-primary {
+  background: var(--accentColor);
+  color: #0b080c;
+  border: 1px solid var(--accentColor);
+}
+
+.email-toast-btn-primary:hover {
+  background: #d4bfff;
+  color: #0b080c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(194, 164, 255, 0.35);
+}
+
+.email-toast-btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ddd5e4;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.email-toast-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.email-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accentColor), #e6c3ff);
+  animation: emailToastProgress 5s linear forwards;
+}
+
+@keyframes emailToastProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .email-toast-container {
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+  }
+  .email-toast {
+    padding: 14px 16px;
+  }
+}

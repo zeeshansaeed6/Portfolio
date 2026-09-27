@@ -1,4 +1,5 @@
-import { MdArrowOutward, MdCopyright } from "react-icons/md";
+import { MdArrowOutward, MdCopyright, MdOutlineEmail } from "react-icons/md";
+import { handleEmailClick } from "./utils/email";
 import "./styles/Contact.css";
 
 const Contact = () => {
@@ -10,8 +11,15 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Email</h4>
             <p>
-              <a href="mailto:saeedzeeshan2003@gmail.com" data-cursor="disable">
-                saeedzeeshan2003@gmail.com
+              <a
+                href="mailto:saeedzeeshan2003@gmail.com"
+                data-cursor="disable"
+                className="contact-email-link"
+                onClick={(e) => handleEmailClick(e)}
+                title="Click to email saeedzeeshan2003@gmail.com or copy address"
+              >
+                <MdOutlineEmail className="contact-email-icon" />
+                <span>saeedzeeshan2003@gmail.com</span>
               </a>
             </p>
             <h4>Phone</h4>
@@ -55,11 +63,13 @@ const Contact = () => {
               LeetCode (Active) <MdArrowOutward />
             </a>
             <a
-              href="#"
+              href="mailto:saeedzeeshan2003@gmail.com"
+              onClick={(e) => handleEmailClick(e)}
               data-cursor="disable"
               className="contact-social"
+              title="Send an Email"
             >
-              Portfolio <MdArrowOutward />
+              Email <MdArrowOutward />
             </a>
           </div>
           <div className="contact-box">

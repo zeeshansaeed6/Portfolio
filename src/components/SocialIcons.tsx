@@ -8,6 +8,7 @@ import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
+import { handleEmailClick } from "./utils/email";
 
 const SocialIcons = () => {
   useEffect(() => {
@@ -103,12 +104,22 @@ const SocialIcons = () => {
           </a>
         </span>
         <span>
-          <a href="mailto:saeedzeeshan2003@gmail.com" aria-label="Email">
+          <a
+            href="mailto:saeedzeeshan2003@gmail.com"
+            aria-label="Email"
+            onClick={(e) => handleEmailClick(e)}
+            title="Email (saeedzeeshan2003@gmail.com)"
+          >
             <MdOutlineEmail />
           </a>
         </span>
       </div>
-      <a className="resume-button" href="mailto:saeedzeeshan2003@gmail.com?subject=Resume%20Request%20-%20Zeeshan%20Saeed">
+      <a
+        className="resume-button"
+        href="mailto:saeedzeeshan2003@gmail.com?subject=Resume%20Request%20-%20Zeeshan%20Saeed"
+        onClick={(e) => handleEmailClick(e, "Resume Request - Zeeshan Saeed")}
+        title="Request Resume"
+      >
         <HoverLinks text="RESUME" />
         <span>
           <TbNotes />

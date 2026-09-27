@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { handleEmailClick } from "./utils/email";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -49,6 +50,8 @@ const Navbar = () => {
           href="mailto:saeedzeeshan2003@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
+          onClick={(e) => handleEmailClick(e)}
+          title="Email saeedzeeshan2003@gmail.com"
         >
           saeedzeeshan2003@gmail.com
         </a>
