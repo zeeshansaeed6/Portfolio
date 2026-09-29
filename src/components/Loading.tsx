@@ -16,19 +16,19 @@ const Loading = ({ percent }: { percent: number }) => {
         setLoaded(true);
         const timer2 = setTimeout(() => {
           setIsLoaded(true);
-        }, 800);
+        }, 500);
         return () => clearTimeout(timer2);
-      }, 400);
+      }, 200);
       return () => clearTimeout(timer1);
     }
   }, [percent]);
 
-  // Safety fallback: if anything hangs, reveal page after 3.5s
+  // Safety fallback: if anything hangs, reveal page after 2.5s
   useEffect(() => {
     const safetyTimer = setTimeout(() => {
       setLoaded(true);
       setIsLoaded(true);
-    }, 3500);
+    }, 2500);
     return () => clearTimeout(safetyTimer);
   }, []);
 
@@ -46,7 +46,7 @@ const Loading = ({ percent }: { percent: number }) => {
           .finally(() => {
             setIsLoading(false);
           });
-      }, 800);
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [isLoaded, setIsLoading]);
@@ -116,21 +116,21 @@ export const setProgress = (setLoading: (value: number) => void) => {
   let percent: number = 0;
 
   let interval = setInterval(() => {
-    if (percent <= 50) {
-      let rand = Math.round(Math.random() * 5);
+    if (percent <= 60) {
+      let rand = Math.round(Math.random() * 8 + 3);
       percent = percent + rand;
-      setLoading(percent);
+      setLoading(Math.min(percent, 60));
     } else {
       clearInterval(interval);
       interval = setInterval(() => {
-        percent = percent + Math.round(Math.random());
-        setLoading(percent);
+        percent = percent + Math.round(Math.random() * 2 + 1);
+        setLoading(Math.min(percent, 92));
         if (percent > 91) {
           clearInterval(interval);
         }
-      }, 2000);
+      }, 250);
     }
-  }, 100);
+  }, 50);
 
   function clear() {
     clearInterval(interval);

@@ -1,7 +1,8 @@
-import Scene from "./Scene";
+import HeroProfile from "../HeroProfile";
 
 const CharacterModel = () => {
-  return <Scene />;
+  return <HeroProfile />;
 };
 
 export default CharacterModel;
+

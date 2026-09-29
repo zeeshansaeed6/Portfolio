@@ -1,5 +1,8 @@
 import * as THREE from "three";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
@@ -137,8 +140,117 @@ export function setCharTimeline(
   }
 }
 
+export function setHeroImageTimeline() {
+  ScrollTrigger.getById("hero-tl1")?.kill();
+  ScrollTrigger.getById("hero-tl2")?.kill();
+  ScrollTrigger.getById("hero-tl3")?.kill();
+
+  const tl1 = gsap.timeline({
+    id: "hero-tl1",
+    scrollTrigger: {
+      trigger: ".landing-section",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+      invalidateOnRefresh: true,
+    },
+  });
+  const tl2 = gsap.timeline({
+    id: "hero-tl2",
+    scrollTrigger: {
+      trigger: ".about-section",
+      start: "center 55%",
+      end: "bottom top",
+      scrub: true,
+      invalidateOnRefresh: true,
+    },
+  });
+  const tl3 = gsap.timeline({
+    id: "hero-tl3",
+    scrollTrigger: {
+      trigger: ".whatIDO",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+      invalidateOnRefresh: true,
+    },
+  });
+
+  if (window.innerWidth > 1024) {
+    tl1
+      .fromTo(
+        ".hero-profile-container",
+        { x: 0, scale: 1, opacity: 1 },
+        { x: "-24%", scale: 0.96, opacity: 1, duration: 1 },
+        0
+      )
+      .to(".landing-container", { opacity: 0, duration: 0.4 }, 0)
+      .to(".landing-container", { y: "40%", duration: 0.8 }, 0)
+      .fromTo(".about-me", { y: "-50%" }, { y: "0%" }, 0);
+
+    tl2
+      .to(".about-section", { y: "30%", duration: 6 }, 0)
+      .to(".about-section", { opacity: 0, delay: 3, duration: 2 }, 0)
+      .fromTo(
+        ".hero-profile-container",
+        { pointerEvents: "inherit", opacity: 1 },
+        {
+          pointerEvents: "none",
+          opacity: 0,
+          x: "-46%",
+          delay: 2,
+          duration: 5,
+          immediateRender: false,
+        },
+        0
+      )
+      .fromTo(
+        ".what-box-in",
+        { display: "none" },
+        { display: "flex", duration: 0.1, delay: 5.5, immediateRender: false },
+        0
+      )
+      .fromTo(
+        ".hero-profile-rim, .hero-profile-glow",
+        { opacity: 1, scale: 1 },
+        {
+          opacity: 0,
+          scale: 0.5,
+          duration: 5,
+          delay: 2,
+          immediateRender: false,
+        },
+        0.3
+      );
+
+    tl3
+      .to(
+        ".hero-profile-container",
+        { y: "-100%", duration: 4, ease: "none", delay: 1 },
+        0
+      )
+      .fromTo(
+        ".whatIDO",
+        { y: 0 },
+        { y: "15%", duration: 2, immediateRender: false },
+        0
+      );
+  } else {
+    const tM2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".what-box-in",
+        start: "top 70%",
+        end: "bottom top",
+      },
+    });
+    tM2.to(".what-box-in", { display: "flex", duration: 0.1, delay: 0 }, 0);
+  }
+}
+
 export function setAllTimeline() {
+  ScrollTrigger.getById("career-tl")?.kill();
   const careerTimeline = gsap.timeline({
+    id: "career-tl",
     scrollTrigger: {
       trigger: ".career-section",
       start: "top 30%",

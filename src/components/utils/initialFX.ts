@@ -1,5 +1,6 @@
 import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { smoother } from "../Navbar";
 
 export function initialFX() {
@@ -99,6 +100,20 @@ export function initialFX() {
       duration: 1.2,
       ease: "power1.inOut",
       delay: 0.1,
+    }
+  );
+  gsap.fromTo(
+    ".hero-profile-container",
+    { opacity: 0, scale: 0.95 },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1.0,
+      ease: "power2.out",
+      delay: 0.2,
+      onComplete: () => {
+        ScrollTrigger.refresh();
+      },
     }
   );
 }
