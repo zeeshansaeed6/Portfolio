@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   max-width: 1920px;
-  height: 80vh;
+  height: 74vh;
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -20,9 +20,9 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 52vh;
-  max-height: 480px;
-  max-width: min(88vw, 420px);
+  height: 48vh;
+  max-height: 430px;
+  max-width: min(88vw, 400px);
   width: 100%;
   z-index: 3;
   transform-style: preserve-3d;
