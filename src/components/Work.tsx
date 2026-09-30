@@ -83,44 +83,77 @@ const projects = [
 
 const Work = () => {
   useEffect(() => {
+    let cleanupTouch: (() => void) | undefined;
+
     const ctx = gsap.context(() => {
-      let translateX: number = 0;
+      const workFlex = document.querySelector(".work-flex") as HTMLElement;
+      if (!workFlex) return;
 
-      function setTranslateX() {
-        const box = document.getElementsByClassName("work-box");
-        if (!box || box.length === 0) return;
-        const workContainer = document.querySelector(".work-container");
-        if (!workContainer) return;
-        const rectLeft = workContainer.getBoundingClientRect().left;
-        const rect = box[0].getBoundingClientRect();
-        const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-        let padding: number =
-          parseInt(window.getComputedStyle(box[0]).padding) / 2;
-        translateX =
-          rect.width * box.length - (rectLeft + parentWidth) + padding;
-      }
-
-      setTranslateX();
+      const getTranslateX = () => {
+        const totalWidth = workFlex.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        const extraOffset = viewportWidth <= 1024 ? 30 : 60;
+        return Math.max(0, totalWidth - viewportWidth + extraOffset);
+      };
 
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: ".work-section",
           start: "top top",
-          end: () => `+=${translateX}`,
-          scrub: true,
+          end: () => `+=${getTranslateX()}`,
+          scrub: 1,
           pin: true,
           id: "work",
           invalidateOnRefresh: true,
+          anticipatePin: 1,
         },
       });
 
       timeline.to(".work-flex", {
-        x: () => -translateX,
+        x: () => -getTranslateX(),
         ease: "none",
       });
+
+      // Mobile horizontal touch swipe support: swiping sideways scrolls the page vertically to drive the animation
+      let startX = 0;
+      let startY = 0;
+
+      const handleTouchStart = (e: TouchEvent) => {
+        if (e.touches.length === 1) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }
+      };
+
+      const handleTouchMove = (e: TouchEvent) => {
+        if (e.touches.length === 1) {
+          const deltaX = startX - e.touches[0].clientX;
+          const deltaY = startY - e.touches[0].clientY;
+          if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 6) {
+            window.scrollBy({ top: deltaX * 1.1, behavior: "auto" });
+            startX = e.touches[0].clientX;
+          }
+        }
+      };
+
+      workFlex.addEventListener("touchstart", handleTouchStart, { passive: true });
+      workFlex.addEventListener("touchmove", handleTouchMove, { passive: true });
+
+      cleanupTouch = () => {
+        workFlex.removeEventListener("touchstart", handleTouchStart);
+        workFlex.removeEventListener("touchmove", handleTouchMove);
+      };
     });
 
-    return () => ctx.revert();
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
+    return () => {
+      clearTimeout(refreshTimer);
+      if (cleanupTouch) cleanupTouch();
+      ctx.revert();
+    };
   }, []);
 
   return (

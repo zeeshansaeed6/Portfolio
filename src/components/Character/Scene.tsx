@@ -121,7 +121,8 @@ const Scene = () => {
       const animate = () => {
         animId = requestAnimationFrame(animate);
         const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-        if (scrollY > window.innerHeight * 2.5) return;
+        const scrollThreshold = window.innerWidth <= 1024 ? window.innerHeight * 1.2 : window.innerHeight * 2.5;
+        if (scrollY > scrollThreshold) return;
         if (headBone) {
           handleHeadRotation(
             headBone,

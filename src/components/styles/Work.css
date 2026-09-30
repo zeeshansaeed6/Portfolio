@@ -1,5 +1,5 @@
 .work-section h2 {
-  margin-top: 100px;
+  margin-top: 80px;
   font-size: 70px;
   font-weight: 500;
 }
@@ -7,10 +7,12 @@
   color: var(--accentColor);
 }
 .work-section {
+  position: relative;
   transition: 0s;
   height: 100vh;
+  height: 100svh;
   box-sizing: border-box;
-  will-change: transform;
+  overflow: hidden;
 }
 .work-container {
   margin: auto;
@@ -26,6 +28,8 @@
   margin-left: -80px;
   padding-right: 120px;
   position: relative;
+  border-top: 1px solid #363636;
+  border-bottom: 1px solid #363636;
 }
 .work-box {
   padding: 80px;
@@ -40,20 +44,6 @@
 }
 .work-flex .work-box:nth-child(even) {
   flex-direction: column-reverse;
-}
-.work-flex::before,
-.work-flex::after {
-  content: "";
-  width: calc(50000vw);
-  height: 1px;
-  background-color: #363636;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-}
-.work-flex::after {
-  top: 100%;
 }
 .work-title {
   justify-content: space-between;
@@ -99,6 +89,7 @@
 }
 .work-image-in {
   position: relative;
+  display: inline-block;
 }
 .work-link {
   position: absolute;
@@ -135,7 +126,9 @@
 .work-image img {
   max-width: 100%;
   max-height: 350px;
+  object-fit: contain;
 }
+
 @media only screen and (max-height: 900px) {
   .work-image img {
     max-height: 250px;
@@ -147,9 +140,10 @@
   .work-section h2 {
     font-size: 60px;
     margin-bottom: 30px;
-    margin-top: 70px;
+    margin-top: 60px;
   }
 }
+
 @media only screen and (max-width: 1400px) {
   .work-title h3 {
     font-size: 35px;
@@ -162,7 +156,8 @@
   }
   .work-box {
     width: 450px;
-    padding: 50px;
+    padding: 40px;
+    gap: 30px;
   }
   .work-flex {
     margin-left: -50px;
@@ -170,48 +165,113 @@
   }
   .work-section h2 {
     font-size: 50px;
-  }
-}
-@media only screen and (max-width: 1400px) {
-  .work-box {
-    width: 350px;
-    padding: 30px;
-  }
-  .work-flex {
-    margin-left: -30px;
-    padding-right: 45px;
+    margin-top: 50px;
   }
 }
 
 @media only screen and (max-height: 650px) {
   .work-image img {
-    max-height: 200px;
+    max-height: 180px;
   }
   .work-section h2 {
-    font-size: 40px;
-    margin-bottom: 20px;
+    font-size: 36px;
+    margin-bottom: 15px;
+    margin-top: 30px;
   }
   .work-box {
-    gap: 20px;
+    gap: 15px;
   }
 }
-/* @media only screen and (max-width: 900px) {
-  .work-image img {
-    max-height: 200px;
-  }
-  .work-section h2 {
-    font-size: 40px;
-    margin-bottom: 20px;
-  }
-  .work-box {
-    gap: 20px;
-  }
-} */
+
 @media only screen and (max-width: 1025px) {
+  .work-section {
+    height: 100vh;
+    height: 100svh;
+  }
   .work-container {
     align-content: normal;
+    justify-content: center;
+  }
+  .work-section h2 {
+    font-size: 38px;
+    margin-top: 30px;
+    margin-bottom: 15px;
   }
   .work-flex {
     height: auto;
+    margin-left: 0;
+    padding-right: 30px;
+  }
+  .work-box {
+    width: min(85vw, 340px);
+    padding: 24px;
+    gap: 18px;
+  }
+  .work-flex .work-box:nth-child(even) {
+    flex-direction: column;
+  }
+  .work-image img {
+    max-height: 170px;
+  }
+  .work-title {
+    margin-bottom: 10px;
+  }
+  .work-title h3 {
+    font-size: 32px;
+    line-height: 32px;
+  }
+  .work-title h4 {
+    font-size: 18px;
+  }
+  .work-info h4 {
+    font-size: 14px;
+  }
+  .work-info p {
+    font-size: 12px;
+  }
+  .work-info p.work-desc {
+    font-size: 12px;
+    line-height: 1.45;
+    margin-top: 8px;
+  }
+  .work-link {
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .work-section h2 {
+    font-size: 32px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .work-box {
+    width: 290px;
+    padding: 16px 18px;
+    gap: 12px;
+  }
+  .work-image img {
+    max-height: 140px;
+  }
+  .work-title h3 {
+    font-size: 26px;
+    line-height: 26px;
+  }
+  .work-title h4 {
+    font-size: 16px;
+  }
+  .work-info h4 {
+    font-size: 13px;
+  }
+  .work-info p {
+    font-size: 11.5px;
+  }
+  .work-info p.work-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    margin-top: 6px;
   }
 }
