@@ -1,82 +1,91 @@
 import { useEffect } from "react";
 import "./styles/Work.css";
-import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MdArrowOutward } from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
+interface Project {
+  name: string;
+  category: string;
+  tools: string[];
+  description: string;
+  image: string;
+  link: string;
+}
+
+const projects: Project[] = [
   {
     name: "Aegis Ultimate",
     category: "Zero-Telemetry Browser & Search",
-    tools: "Electron, Chromium, Node.js, BM25 Indexing, Gemini API, Ollama, Tor, JavaScript, Express.js",
+    tools: ["Electron", "Chromium", "Node.js", "BM25 Indexing", "Gemini API", "Ollama", "Tor", "Express.js"],
     description:
-      "Sovereign zero-telemetry private search engine & Chromium desktop browser suite featuring sub-5ms BM25 local indexing, isolated multi-tab proxy browsing, Perplexity-style cited AI synthesis, autonomous web crawler studio, and Google-parity instant tools.",
+      "Sovereign zero-telemetry private search engine & Chromium desktop browser suite featuring sub-5ms BM25 local indexing, isolated multi-tab proxy browsing, cited AI synthesis, and instant tools.",
     image: "/images/aegis.png",
     link: "https://github.com/zeeshansaeed6/Aegis-Ultimate",
   },
   {
     name: "OmniMarket",
     category: "MERN Multi-Vendor Hub",
-    tools: "MERN Stack, Stripe Escrow, Multi-Currency, Redux, RBAC",
+    tools: ["MERN Stack", "Stripe Escrow", "Multi-Currency", "Redux", "RBAC"],
     description:
-      "Commercial-grade multi-vendor marketplace featuring Stripe 3D-secure escrow payments, item-level split vendor fulfillment, dynamic 9-currency conversion, and dedicated vendor & admin management hubs.",
-    image: "/images/react.webp",
+      "Commercial-grade multi-vendor marketplace featuring Stripe 3D-secure escrow payments, item-level split vendor fulfillment, dynamic 9-currency conversion, and vendor management hubs.",
+    image: "/images/project-omnimarket.jpg",
     link: "https://github.com/zeeshansaeed6/E-CommWeb",
   },
   {
     name: "SerpentAI Ultra",
     category: "Multimodal AI & HealthTech",
-    tools: "MERN Stack, Gemini Vision AI, WebRTC, Geolocation API",
+    tools: ["MERN Stack", "Gemini Vision AI", "WebRTC", "Geolocation API"],
     description:
       "Multimodal AI vision suite for real-time snake species identification, venom risk triage scoring, low-light photo enhancement, and auto-dispatched GPS antivenom hospital routing.",
-    image: "/images/node.webp",
+    image: "/images/project-serpentai.jpg",
     link: "https://github.com/zeeshansaeed6/snake-species-detection",
   },
   {
     name: "FoodDash",
     category: "Food Delivery & Social Dining",
-    tools: "Vite, Vanilla JS, Node.js, Express.js, Three.js",
+    tools: ["Vite", "Node.js", "Express.js", "Three.js", "Split Billing"],
     description:
-      "Next-generation food delivery platform blending e-commerce with social media, gamification, and WebGL 3D graphics. Features AI-powered dining intelligence and an immersive 3D food inspector.",
-    image: "/images/react.webp",
+      "Next-generation food delivery platform blending e-commerce with social dining, gamification, and WebGL 3D graphics. Features AI dining intelligence and an immersive 3D food inspector.",
+    image: "/images/project-fooddash.jpg",
     link: "https://github.com/zeeshansaeed6/FoodDash",
   },
   {
     name: "Brain Tumor Detection",
     category: "AI & Computer Vision",
-    tools: "Python, TensorFlow, OpenCV, Plotly",
+    tools: ["Python", "TensorFlow", "OpenCV", "Plotly", "CNNs"],
     description:
-      "CNN model classifying MRI scans for tumor presence with iterative model tuning. OpenCV preprocessing for noise reduction and interactive Plotly metric visualizations.",
-    image: "/images/node2.webp",
+      "Deep learning CNN model classifying MRI scans for tumor presence with iterative model tuning. OpenCV preprocessing for noise reduction and interactive metric dashboards.",
+    image: "/images/project-braintumor.jpg",
     link: "https://github.com",
   },
   {
     name: "CollegeERP",
     category: "ERP & Automation",
-    tools: "MERN Stack, Twilio API, MongoDB, Node.js",
+    tools: ["MERN Stack", "Twilio API", "MongoDB", "Node.js"],
     description:
       "Centralized Educational Resource Planning system digitizing student records, attendance, and administrative operations with automated Twilio SMS alert integration.",
-    image: "/images/mongo.webp",
+    image: "/images/project-collegeerp.jpg",
     link: "https://github.com",
   },
   {
     name: "Generative AI Suite",
     category: "LLMs & Smart UX",
-    tools: "Generative AI, LLMs, FastAPI, React, Supabase",
+    tools: ["Generative AI", "LLMs", "FastAPI", "React", "Supabase"],
     description:
-      "Intelligent application suite integrating LLMs and generative AI tools to power context-aware user workflows with scalable system architecture.",
-    image: "/images/express.webp",
+      "Intelligent application suite integrating LLMs and generative AI tools to power context-aware user workflows with scalable system architecture and streaming responses.",
+    image: "/images/project-genai.jpg",
     link: "https://github.com",
   },
   {
     name: "Data Analytics Engine",
     category: "Analytics & Systems",
-    tools: "Python, Pandas, NumPy, Plotly, AWS",
+    tools: ["Python", "Pandas", "NumPy", "Plotly", "AWS"],
     description:
-      "Production-style analytics pipeline and interactive dashboards from enterprise case studies, optimized for high data throughput and actionable insights.",
-    image: "/images/javascript.webp",
+      "Production-style analytics pipeline and interactive dashboards from enterprise case studies, optimized for high data throughput and actionable executive insights.",
+    image: "/images/project-analytics.jpg",
     link: "https://github.com",
   },
 ];
@@ -92,7 +101,7 @@ const Work = () => {
       const getTranslateX = () => {
         const totalWidth = workFlex.scrollWidth;
         const viewportWidth = window.innerWidth;
-        const extraOffset = viewportWidth <= 1024 ? 30 : 60;
+        const extraOffset = viewportWidth <= 1024 ? 40 : 80;
         return Math.max(0, totalWidth - viewportWidth + extraOffset);
       };
 
@@ -114,7 +123,7 @@ const Work = () => {
         ease: "none",
       });
 
-      // Mobile horizontal touch swipe support: swiping sideways scrolls the page vertically to drive the animation
+      // Horizontal touch swipe support for mobile
       let startX = 0;
       let startY = 0;
 
@@ -147,7 +156,7 @@ const Work = () => {
 
     const refreshTimer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 500);
+    }, 400);
 
     return () => {
       clearTimeout(refreshTimer);
@@ -157,33 +166,72 @@ const Work = () => {
   }, []);
 
   return (
-    <div className="work-section" id="work">
-      <div className="work-container section-container">
-        <h2>
-          My <span>Projects</span>
-        </h2>
+    <section className="work-section" id="work">
+      <div className="work-header-wrap">
+        <div className="work-header">
+          <h2>
+            My <span>Projects</span>
+          </h2>
+          <span className="work-header-count">08 FEATURED PROJECTS</span>
+        </div>
+      </div>
+
+      <div className="work-track-wrapper">
         <div className="work-flex">
           {projects.map((project, index) => (
-            <div className="work-box" key={index}>
-              <div className="work-info">
-                <div className="work-title">
-                  <h3>{index + 1 < 10 ? `0${index + 1}` : index + 1}</h3>
-
-                  <div>
-                    <h4>{project.name}</h4>
-                    <p>{project.category}</p>
-                  </div>
-                </div>
-                <h4>Tools & Features</h4>
-                <p>{project.tools}</p>
-                <p className="work-desc">{project.description}</p>
+            <div className="work-card" key={index}>
+              <div className="work-card-top">
+                <span className="work-card-num">
+                  {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                </span>
+                <span className="work-card-category">{project.category}</span>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="work-card-link"
+                    title={`View ${project.name}`}
+                    data-cursor="disable"
+                  >
+                    <MdArrowOutward />
+                  </a>
+                )}
               </div>
-              <WorkImage image={project.image} alt={project.name} link={project.link} />
+
+              <div className="work-card-body">
+                <h3 className="work-card-title">{project.name}</h3>
+                <p className="work-card-desc">{project.description}</p>
+                <div className="work-card-tags">
+                  {project.tools.map((tool, tIdx) => (
+                    <span className="work-tag" key={tIdx}>
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="work-card-media">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="disable"
+                  tabIndex={-1}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
