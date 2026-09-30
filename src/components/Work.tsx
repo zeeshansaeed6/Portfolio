@@ -41,7 +41,7 @@ const projects: Project[] = [
     description:
       "Multimodal AI vision suite for real-time snake species identification, venom risk triage scoring, low-light photo enhancement, and auto-dispatched GPS antivenom hospital routing.",
     image: "/images/project-serpentai.jpg",
-    link: "https://github.com/zeeshansaeed6/snake-species-detection",
+    link: "https://github.com/zeeshansaeed6/SerpentAI-",
   },
   {
     name: "FoodDash",
@@ -59,7 +59,7 @@ const projects: Project[] = [
     description:
       "Deep learning CNN model classifying MRI scans for tumor presence with iterative model tuning. OpenCV preprocessing for noise reduction and interactive metric dashboards.",
     image: "/images/project-braintumor.jpg",
-    link: "https://github.com",
+    link: "https://github.com/zeeshansaeed6/BrainTumorDetection",
   },
   {
     name: "CollegeERP",
@@ -68,25 +68,7 @@ const projects: Project[] = [
     description:
       "Centralized Educational Resource Planning system digitizing student records, attendance, and administrative operations with automated Twilio SMS alert integration.",
     image: "/images/project-collegeerp.jpg",
-    link: "https://github.com",
-  },
-  {
-    name: "Generative AI Suite",
-    category: "LLMs & Smart UX",
-    tools: ["Generative AI", "LLMs", "FastAPI", "React", "Supabase"],
-    description:
-      "Intelligent application suite integrating LLMs and generative AI tools to power context-aware user workflows with scalable system architecture and streaming responses.",
-    image: "/images/project-genai.jpg",
-    link: "https://github.com",
-  },
-  {
-    name: "Data Analytics Engine",
-    category: "Analytics & Systems",
-    tools: ["Python", "Pandas", "NumPy", "Plotly", "AWS"],
-    description:
-      "Production-style analytics pipeline and interactive dashboards from enterprise case studies, optimized for high data throughput and actionable executive insights.",
-    image: "/images/project-analytics.jpg",
-    link: "https://github.com",
+    link: "https://github.com/zeeshansaeed6/CollegeERP",
   },
 ];
 
@@ -172,7 +154,7 @@ const Work = () => {
           <h2>
             My <span>Projects</span>
           </h2>
-          <span className="work-header-count">08 FEATURED PROJECTS</span>
+          <span className="work-header-count">06 FEATURED PROJECTS</span>
         </div>
       </div>
 
