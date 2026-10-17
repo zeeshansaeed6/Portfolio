@@ -4,6 +4,8 @@ import { FaCertificate } from "react-icons/fa6";
 const certifications = [
   "Software Engineer (HackerRank)",
   "Software Engineering Intern (HackerRank)",
+  "Advanced Software Engineering (Walmart USA – Forage)",
+  "Problem Solving Intermediate (HackerRank)",
   "Oracle Cloud Infrastructure Certified AI Foundation Associate",
   "AWS Certified Machine Learning",
   "Google Cloud AI",
