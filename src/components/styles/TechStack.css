@@ -1,0 +1,227 @@
+.techstack {
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  margin: auto;
+  padding: 80px 0 100px 0;
+  box-sizing: border-box;
+}
+
+.techstack-header {
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 5;
+}
+
+.techstack-header h2 {
+  font-size: 64px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -1px;
+  color: #ffffff;
+}
+
+.techstack-header h2 > span {
+  color: var(--accentColor, #cbb1ff);
+  text-shadow: 0 0 30px rgba(168, 124, 255, 0.4);
+}
+
+.techstack-subtitle {
+  font-size: 15px;
+  color: #a7a4b2;
+  margin-top: 10px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.tech-canvas-wrapper {
+  width: 100%;
+  height: 520px;
+  position: relative;
+  margin-bottom: 40px;
+  border-radius: 24px;
+  background: radial-gradient(circle at center, rgba(168, 124, 255, 0.05) 0%, rgba(11, 8, 12, 0.4) 70%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.tech-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.tech-canvas-hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Categorized Skill Matrix */
+.tech-matrix-section {
+  width: var(--cWidth, 90%);
+  max-width: var(--cMaxWidth, 1400px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.tech-matrix-title {
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accentColor, #cbb1ff);
+  font-weight: 500;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tech-matrix-title::before,
+.tech-matrix-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(168, 124, 255, 0.5));
+}
+
+.tech-matrix-title::after {
+  background: linear-gradient(90deg, rgba(168, 124, 255, 0.5), transparent);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.tech-card {
+  background: rgba(18, 15, 23, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 24px 22px;
+  backdrop-filter: blur(14px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cardAccent, #cbb1ff), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 124, 255, 0.25);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(168, 124, 255, 0.08);
+}
+
+.tech-card:hover::before {
+  opacity: 1;
+}
+
+.tech-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tech-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(168, 124, 255, 0.12);
+  color: var(--cardAccent, #cbb1ff);
+  font-size: 18px;
+}
+
+.tech-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.tech-badges-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: #dfdbf0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 6px 13px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.tech-badge:hover {
+  background: rgba(168, 124, 255, 0.15);
+  border-color: rgba(168, 124, 255, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.tech-badge.highlight {
+  background: rgba(168, 124, 255, 0.1);
+  border-color: rgba(168, 124, 255, 0.25);
+  color: #f3ecff;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 900px) {
+  .techstack {
+    padding: 50px 0 70px 0;
+  }
+  .techstack-header h2 {
+    font-size: 38px;
+  }
+  .techstack-subtitle {
+    font-size: 13px;
+  }
+  .tech-canvas-wrapper {
+    height: 380px;
+    margin-bottom: 30px;
+  }
+  .tech-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

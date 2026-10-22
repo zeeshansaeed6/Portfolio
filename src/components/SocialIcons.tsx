@@ -94,7 +94,7 @@ const SocialIcons = () => {
           </a>
         </span>
         <span>
-          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/zeeshan-saeed0609" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <FaLinkedinIn />
           </a>
         </span>
@@ -116,9 +116,10 @@ const SocialIcons = () => {
       </div>
       <a
         className="resume-button"
-        href="mailto:saeedzeeshan2003@gmail.com?subject=Resume%20Request%20-%20Zeeshan%20Saeed"
-        onClick={(e) => handleEmailClick(e, "Resume Request - Zeeshan Saeed")}
-        title="Request Resume"
+        href="/Zeeshan_Resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="View & Download Resume (Zeeshan Saeed)"
       >
         <HoverLinks text="RESUME" />
         <span>

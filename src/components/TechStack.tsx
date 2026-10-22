@@ -8,6 +8,16 @@ import {
   RigidBody,
   RapierRigidBody,
 } from "@react-three/rapier";
+import {
+  FaCode,
+  FaLaptopCode,
+  FaServer,
+  FaDatabase,
+  FaBrain,
+  FaCloud,
+  FaGears,
+} from "react-icons/fa6";
+import "./styles/TechStack.css";
 
 interface TechBrand {
   name: string;
@@ -27,6 +37,11 @@ const techBrands: TechBrand[] = [
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110"><path fill="#3776AB" d="M54.5 10c-13.4 0-22.3 5.8-22.3 17.1v12.4h22.9v3.4H22.3C10.9 42.9 0 52.8 0 66.2c0 13.3 9.4 23.3 22.3 23.3h7.2v-10.3c0-11.8 10.1-22.1 22.3-22.1h22.9V44.7c0-11.3-9.5-17.6-22.5-17.6h-4.7V10zm-11.4 6.8a3.9 3.9 0 1 1 0 7.8 3.9 3.9 0 0 1 0-7.8z"/><path fill="#FFD438" d="M55.5 100c13.4 0 22.3-5.8 22.3-17.1V70.5H54.9v-3.4h32.8c11.4 0 22.3-9.9 22.3-23.3 0-13.3-9.4-23.3-22.3-23.3h-7.2v10.3c0 11.8-10.1 22.1-22.3 22.1H35.3v12.4c0 11.3 9.5 17.6 22.5 17.6h4.7V100zm11.4-6.8a3.9 3.9 0 1 1 0-7.8 3.9 3.9 0 0 1 0 7.8z"/></svg>`,
   },
   {
+    name: "React.js",
+    color: "#61DAFB",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.232 23 20.463"><circle cx="0" cy="0" r="2.05" fill="#61DAFB"/><g stroke="#61DAFB" stroke-width="1.1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>`,
+  },
+  {
     name: "Node.js",
     color: "#5FA04E",
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 288"><path fill="#5FA04E" d="M128 0 0 74v148l128 74 128-74V74L128 0zm103 210-103 59-103-59V92l103-59 103 59v118z"/><text x="128" y="160" fill="#ffffff" font-size="64" font-weight="900" font-family="sans-serif" text-anchor="middle">node</text></svg>`,
@@ -37,9 +52,44 @@ const techBrands: TechBrand[] = [
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 128"><rect width="256" height="128" rx="24" fill="#1C1B24" stroke="#ffffff" stroke-width="5"/><text x="128" y="78" fill="#ffffff" font-size="52" font-family="sans-serif" font-weight="900" text-anchor="middle" font-style="italic">express</text></svg>`,
   },
   {
+    name: "FastAPI",
+    color: "#05998B",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="56" fill="#05998B"/><path fill="#ffffff" d="M64 18 38 68h24l-6 42 34-52H66l6-40z"/></svg>`,
+  },
+  {
     name: "MongoDB",
     color: "#00ED64",
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#00ED64" d="M64 4c-2 0-22 28-22 62 0 28 13 48 18 54 2 2 4 4 4 4s2-2 4-4c5-6 18-26 18-54C86 32 66 4 64 4z"/><path fill="#116149" d="M64 12v104c-1 0-8-12-11-20-4-10-7-22-7-34 0-24 12-42 18-50z"/></svg>`,
+  },
+  {
+    name: "PostgreSQL",
+    color: "#3ECF8E",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#1C1C1C"/><path fill="#3ECF8E" d="M68 18c-3-4-9-2-10 3l-18 42c-2 4 1 8 5 8h22l-10 39c-2 6 5 9 8 5l30-42c3-4 0-9-5-9H68l8-41c1-2 0-4-2-5z"/></svg>`,
+  },
+  {
+    name: "SQL",
+    color: "#00758F",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#00758F"/><ellipse cx="64" cy="36" rx="44" ry="15" fill="#F29111" stroke="#ffffff" stroke-width="3"/><path d="M20 36v46c0 8 20 15 44 15s44-7 44-15V36" fill="none" stroke="#ffffff" stroke-width="4"/><path d="M20 60c0 8 20 15 44 15s44-7 44-15" fill="none" stroke="#ffffff" stroke-width="4"/><text x="64" y="118" fill="#ffffff" font-size="22" font-family="sans-serif" font-weight="900" text-anchor="middle">SQL</text></svg>`,
+  },
+  {
+    name: "GenAI & LLM",
+    color: "#A87CFF",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="58" fill="#1e1338" stroke="#a87cff" stroke-width="4"/><path fill="#a87cff" d="M64 24l8 24 24 8-24 8-8 24-8-24-24-8 24-8 8-24z"/><circle cx="96" cy="40" r="7" fill="#fb8dff"/><circle cx="36" cy="88" r="6" fill="#61dafb"/></svg>`,
+  },
+  {
+    name: "TensorFlow",
+    color: "#FF6F00",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#FF6F00" d="M64 12 16 39v27l48-27 48 27V39L64 12zm0 32L24 66v27l40-23V44zm40 22-16 9v27l16-9V66zM64 76l-16 9v27l16-9 16 9V85L64 76z"/></svg>`,
+  },
+  {
+    name: "OpenCV",
+    color: "#8DC63F",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="40" r="22" fill="#EE2A24"/><circle cx="64" cy="40" r="9" fill="#0c0a12"/><circle cx="42" cy="82" r="22" fill="#00AEEF"/><circle cx="42" cy="82" r="9" fill="#0c0a12"/><circle cx="86" cy="82" r="22" fill="#8DC63F"/><circle cx="86" cy="82" r="9" fill="#0c0a12"/></svg>`,
+  },
+  {
+    name: "AWS Cloud",
+    color: "#FF9900",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#232F3E"/><text x="64" y="68" fill="#FF9900" font-size="44" font-weight="900" font-family="sans-serif" text-anchor="middle">aws</text><path d="M30 84c20 12 48 12 68 0" stroke="#FF9900" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`,
   },
   {
     name: "Docker",
@@ -47,19 +97,112 @@ const techBrands: TechBrand[] = [
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#2496ED" d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.186.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.186.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.186.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.136a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.928 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.208a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m21.605 1.954c-.402-.27-1.424-.46-2.316-.277-.144-.755-.662-1.396-1.328-1.748l-.403-.213-.263.364c-.496.69-.76 1.58-.76 2.553 0 .42.062.83.178 1.22-.44.22-.977.34-1.585.34H.576a.576.576 0 00-.576.576c0 1.25.26 2.45.748 3.522.656 1.442 1.69 2.65 2.97 3.497 1.574 1.042 3.47 1.607 5.485 1.607 6.782 0 12.355-4.802 13.064-11.23.013-.122.02-.244.02-.366 0-.61-.07-.98-.292-1.282l-.178-.225z"/></svg>`,
   },
   {
-    name: "React",
-    color: "#61DAFB",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.232 23 20.463"><circle cx="0" cy="0" r="2.05" fill="#61DAFB"/><g stroke="#61DAFB" stroke-width="1.1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>`,
+    name: "C Language",
+    color: "#659AD2",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#044F88"/><text x="64" y="86" fill="#ffffff" font-size="76" font-weight="900" font-family="sans-serif" text-anchor="middle">C</text></svg>`,
   },
   {
-    name: "SQL & MySQL",
-    color: "#00758F",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#00758F"/><ellipse cx="64" cy="36" rx="44" ry="15" fill="#F29111" stroke="#ffffff" stroke-width="3"/><path d="M20 36v46c0 8 20 15 44 15s44-7 44-15V36" fill="none" stroke="#ffffff" stroke-width="4"/><path d="M20 60c0 8 20 15 44 15s44-7 44-15" fill="none" stroke="#ffffff" stroke-width="4"/><text x="64" y="118" fill="#ffffff" font-size="22" font-family="sans-serif" font-weight="900" text-anchor="middle">SQL</text></svg>`,
+    name: "Git & GitHub",
+    color: "#F05032",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#F05032"/><circle cx="44" cy="44" r="12" fill="#ffffff"/><circle cx="44" cy="84" r="12" fill="#ffffff"/><circle cx="84" cy="64" r="12" fill="#ffffff"/><path d="M44 44v40M44 64c20 0 40 0 40 0" stroke="#ffffff" stroke-width="7" fill="none"/></svg>`,
+  },
+];
+
+// Resume skill matrix grouped by exact categories
+interface SkillCategory {
+  title: string;
+  icon: React.ReactNode;
+  accent: string;
+  skills: { name: string; highlight?: boolean }[];
+}
+
+const skillCategories: SkillCategory[] = [
+  {
+    title: "Programming Languages",
+    icon: <FaCode />,
+    accent: "#F7DF1E",
+    skills: [
+      { name: "JavaScript (ES6+)", highlight: true },
+      { name: "Python", highlight: true },
+      { name: "C", highlight: false },
+    ],
   },
   {
-    name: "TypeScript",
-    color: "#3178C6",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#3178C6"/><path fill="#ffffff" d="M38 42h52v12H68v48H52V54H38V42zm48 24c6 0 12 2 16 5l-4 10c-3-2-8-4-12-4-5 0-8 2-8 5 0 8 26 4 26 21 0 12-10 19-24 19-8 0-16-3-20-6l5-10c4 3 10 5 15 5 6 0 9-3 9-6 0-9-26-5-26-21 0-11 9-18 23-18z"/></svg>`,
+    title: "Frontend Engineering",
+    icon: <FaLaptopCode />,
+    accent: "#61DAFB",
+    skills: [
+      { name: "React.js", highlight: true },
+      { name: "React Native", highlight: false },
+      { name: "HTML5", highlight: false },
+      { name: "CSS3", highlight: false },
+      { name: "Responsive UI", highlight: false },
+    ],
+  },
+  {
+    title: "Backend & Systems",
+    icon: <FaServer />,
+    accent: "#5FA04E",
+    skills: [
+      { name: "Node.js", highlight: true },
+      { name: "Express.js", highlight: true },
+      { name: "FastAPI", highlight: true },
+      { name: "RESTful API Design", highlight: true },
+      { name: "JWT Authentication", highlight: false },
+      { name: "RBAC", highlight: false },
+    ],
+  },
+  {
+    title: "Databases & Storage",
+    icon: <FaDatabase />,
+    accent: "#3ECF8E",
+    skills: [
+      { name: "MongoDB", highlight: true },
+      { name: "SQL", highlight: true },
+      { name: "PostgreSQL / Supabase", highlight: true },
+      { name: "Aggregation Pipelines", highlight: false },
+      { name: "Indexing Strategies", highlight: false },
+    ],
+  },
+  {
+    title: "AI, ML & Deep Learning",
+    icon: <FaBrain />,
+    accent: "#A87CFF",
+    skills: [
+      { name: "LLM & RAG Integration", highlight: true },
+      { name: "Generative AI", highlight: true },
+      { name: "TensorFlow", highlight: true },
+      { name: "OpenCV", highlight: true },
+      { name: "Grad-CAM Heatmaps", highlight: false },
+      { name: "Pandas", highlight: false },
+      { name: "NumPy", highlight: false },
+    ],
+  },
+  {
+    title: "Tools, DevOps & Cloud",
+    icon: <FaCloud />,
+    accent: "#2496ED",
+    skills: [
+      { name: "Git", highlight: false },
+      { name: "GitHub", highlight: true },
+      { name: "AWS Cloud", highlight: true },
+      { name: "Docker", highlight: true },
+      { name: "Postman", highlight: false },
+      { name: "Jest", highlight: false },
+      { name: "Twilio API", highlight: false },
+    ],
+  },
+  {
+    title: "Engineering Fundamentals",
+    icon: <FaGears />,
+    accent: "#FF9900",
+    skills: [
+      { name: "Data Structures & Algorithms", highlight: true },
+      { name: "System Design", highlight: true },
+      { name: "Agile / SDLC", highlight: false },
+      { name: "Unit Testing", highlight: false },
+      { name: "Code Review", highlight: false },
+    ],
   },
 ];
 
@@ -69,7 +212,6 @@ function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
   canvas.height = 256;
   const ctx = canvas.getContext("2d")!;
 
-  // Dark ceramic ball background
   ctx.fillStyle = "#0c0a12";
   ctx.fillRect(0, 0, 512, 256);
 
@@ -279,52 +421,84 @@ const TechStack = () => {
   }, []);
 
   return (
-    <div className="techstack" ref={containerRef}>
+    <div className="techstack" ref={containerRef} id="techstack">
       <div className="techstack-header">
         <h2>
           My <span>Tech Stack</span>
         </h2>
         <p className="techstack-subtitle">
-          Interactive 3D Physics • Hover & bump to disperse core technologies
+          Interactive 3D Physics Sphere • Hover, drag & bump to disperse core technologies
         </p>
       </div>
 
-      <Canvas
-        shadows
-        dpr={[1, 1.5]}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.45)}
-        className="tech-canvas"
-      >
-        <ambientLight intensity={1.3} />
-        <spotLight
-          position={[20, 25, 25]}
-          penumbra={1}
-          angle={0.25}
-          color="#ffffff"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[-10, 10, 10]} intensity={1.5} color="#e0d4ff" />
-        <directionalLight position={[0, -10, -5]} intensity={1.0} color="#7f60f9" />
-        <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              scale={props.scale}
-              material={materials[props.brandIndex]}
-              isActive={isActive}
-            />
+      <div className="tech-canvas-wrapper">
+        <Canvas
+          shadows
+          dpr={[1, 1.5]}
+          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+          camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
+          onCreated={(state) => (state.gl.toneMappingExposure = 1.45)}
+          className="tech-canvas"
+        >
+          <ambientLight intensity={1.3} />
+          <spotLight
+            position={[20, 25, 25]}
+            penumbra={1}
+            angle={0.25}
+            color="#ffffff"
+            castShadow
+            shadow-mapSize={[512, 512]}
+          />
+          <directionalLight position={[-10, 10, 10]} intensity={1.5} color="#e0d4ff" />
+          <directionalLight position={[0, -10, -5]} intensity={1.0} color="#7f60f9" />
+          <Physics gravity={[0, 0, 0]}>
+            <Pointer isActive={isActive} />
+            {spheres.map((props, i) => (
+              <SphereGeo
+                key={i}
+                scale={props.scale}
+                material={materials[props.brandIndex]}
+                isActive={isActive}
+              />
+            ))}
+          </Physics>
+          <Environment
+            files="/models/char_enviorment.hdr"
+            environmentIntensity={0.65}
+            environmentRotation={[0, 4, 2]}
+          />
+        </Canvas>
+        <div className="tech-canvas-hint">Interactive 3D Canvas • Drag cursor to interact</div>
+      </div>
+
+      {/* Categorized Technical Skills Matrix */}
+      <div className="tech-matrix-section">
+        <div className="tech-matrix-title">Technical Skills & Ecosystem</div>
+        <div className="tech-grid">
+          {skillCategories.map((category, index) => (
+            <div
+              className="tech-card"
+              key={index}
+              style={{ "--cardAccent": category.accent } as React.CSSProperties}
+            >
+              <div className="tech-card-header">
+                <div className="tech-card-icon">{category.icon}</div>
+                <h3 className="tech-card-title">{category.title}</h3>
+              </div>
+              <div className="tech-badges-wrap">
+                {category.skills.map((skill, sIdx) => (
+                  <span
+                    className={`tech-badge ${skill.highlight ? "highlight" : ""}`}
+                    key={sIdx}
+                  >
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
-        </Physics>
-        <Environment
-          files="/models/char_enviorment.hdr"
-          environmentIntensity={0.65}
-          environmentRotation={[0, 4, 2]}
-        />
-      </Canvas>
+        </div>
+      </div>
     </div>
   );
 };

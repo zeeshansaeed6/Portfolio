@@ -6,7 +6,7 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Full-Stack Software Engineer passionate about building next-generation web applications, with a technical stack centered on full-stack development, Generative AI, and algorithmic problem-solving. Skilled in building end-to-end applications using JavaScript and the MERN stack (MongoDB, Express.js, React, Node.js), integrating LLMs and AI tools to create smart, dynamic user experiences, and applying a strong Data Structures &amp; Algorithms foundation to design scalable architecture and highly optimized backend performance. Backed by 10+ certifications across AWS, Google Cloud, Oracle Cloud, Azure, and Generative AI, with a portfolio of 7+ shipped full-stack, ML, and AI projects.
+          Software Engineer with deep fundamentals in Data Structures, Algorithms, and scalable backend architecture, alongside extensive full-stack development experience. Shipped 6+ production-grade and AI-integrated systems — spanning sub-5ms in-memory search engines, high-concurrency transactional platforms, and computer vision models. Currently architecting resilient RESTful APIs, optimizing database pipelines, and applying end-to-end automated testing as a Full-Stack Developer Intern at AccioJob.
         </p>
       </div>
     </div>

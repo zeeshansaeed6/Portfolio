@@ -91,45 +91,7 @@ body {
   flex-wrap: nowrap;
 }
 
-.techstack {
-  width: 100%;
-  position: relative;
-  height: var(--vh);
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: -60px;
-  overflow: visible;
-}
-
-.techstack-header {
-  position: absolute;
-  width: 100%;
-  top: 60px;
-  left: 0;
-  text-align: center;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.techstack-header h2 {
-  font-size: 70px;
-  font-weight: 500;
-  text-transform: uppercase;
-  margin: 0;
-  letter-spacing: -1px;
-}
-
-.techstack-header h2 > span {
-  color: var(--accentColor);
-}
-
-.techstack-subtitle {
-  font-size: 14px;
-  color: #9e9c9c;
-  margin-top: 8px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-}
+/* TechStack container styles are defined in TechStack.css */
 
 @media screen and (min-width: 768px) {
   body {

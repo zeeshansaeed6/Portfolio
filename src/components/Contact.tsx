@@ -45,7 +45,7 @@ const Contact = () => {
               Github <MdArrowOutward />
             </a>
             <a
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/in/zeeshan-saeed0609"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
