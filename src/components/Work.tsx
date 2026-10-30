@@ -44,6 +44,15 @@ const projects: Project[] = [
     link: "https://github.com/zeeshansaeed6/SerpentAI-",
   },
   {
+    name: "My React App",
+    category: "React & Automated DevOps",
+    tools: ["React 18", "JavaScript", "GitHub CLI (gh)", "DevOps CI/CD", "Webpack"],
+    description:
+      "Modern high-performance React SPA built with automated CI/CD DevOps workflows, programmatic branch & PR management via GitHub CLI, and auditable deployment scripting.",
+    image: "/images/project-react-devops.jpg",
+    link: "https://github.com/zeeshansaeed6/my-app",
+  },
+  {
     name: "FoodDash",
     category: "Food Delivery & Social Dining",
     tools: ["Vite", "Node.js", "Express.js", "Three.js", "Split Billing"],
@@ -154,7 +163,9 @@ const Work = () => {
           <h2>
             My <span>Projects</span>
           </h2>
-          <span className="work-header-count">06 FEATURED PROJECTS</span>
+          <span className="work-header-count">
+            {projects.length < 10 ? `0${projects.length}` : projects.length} FEATURED PROJECTS
+          </span>
         </div>
       </div>
 
