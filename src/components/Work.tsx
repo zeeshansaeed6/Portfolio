@@ -26,6 +26,15 @@ const projects: Project[] = [
     link: "https://github.com/zeeshansaeed6/Aegis-Ultimate",
   },
   {
+    name: "Standup Chief of Staff",
+    category: "Voice AI & Alexa+ MCP Server",
+    tools: ["Amazon Bedrock", "Model Context Protocol", "Alexa+", "TypeScript", "React 18", "Express.js"],
+    description:
+      "Voice-first developer chief of staff for Alexa+ powered by MCP and Amazon Bedrock (Nova Lite). Synthesizes spoken daily blocker briefings from GitHub PRs/CI builds and executes two-phase voice actions.",
+    image: "/images/project-standup-chief.jpg",
+    link: "https://github.com/zeeshansaeed6/Standup-Chief-of-Staff",
+  },
+  {
     name: "OmniMarket",
     category: "MERN Multi-Vendor Hub",
     tools: ["MERN Stack", "Stripe Escrow", "Multi-Currency", "Redux", "RBAC"],
