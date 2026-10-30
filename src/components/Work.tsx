@@ -22,7 +22,7 @@ const projects: Project[] = [
     tools: ["Electron", "Chromium", "Node.js", "BM25 Indexing", "Gemini API", "Ollama", "Tor", "Express.js"],
     description:
       "Sovereign zero-telemetry private search engine & Chromium desktop browser suite featuring sub-5ms BM25 local indexing, isolated multi-tab proxy browsing, cited AI synthesis, and instant tools.",
-    image: "/images/aegis.png",
+    image: "/images/aegis.jpg",
     link: "https://github.com/zeeshansaeed6/Aegis-Ultimate",
   },
   {
@@ -92,6 +92,12 @@ const projects: Project[] = [
 
 const Work = () => {
   useEffect(() => {
+    // Preload project images into browser memory cache for zero scroll latency
+    projects.forEach((p) => {
+      const img = new Image();
+      img.src = p.image;
+    });
+
     let cleanupTouch: (() => void) | undefined;
 
     const ctx = gsap.context(() => {
@@ -224,7 +230,9 @@ const Work = () => {
                   <img
                     src={project.image}
                     alt={project.name}
-                    loading="lazy"
+                    width="400"
+                    height="175"
+                    loading={index < 2 ? "eager" : "lazy"}
                     decoding="async"
                   />
                 </a>
