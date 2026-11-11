@@ -109,6 +109,16 @@ const techBrands: TechBrand[] = [
   },
 ];
 
+const groups = ["Languages", "Web & APIs", "Data", "AI & ML", "Cloud & Tools"] as const;
+type Group = (typeof groups)[number];
+const groupOf: Record<string, Group> = {
+  JavaScript: "Languages", Python: "Languages", TypeScript: "Languages", "C Language": "Languages",
+  "React.js": "Web & APIs", "Node.js": "Web & APIs", "Express.js": "Web & APIs", FastAPI: "Web & APIs",
+  MongoDB: "Data", PostgreSQL: "Data", SQL: "Data", Supabase: "Data",
+  "GenAI & LLM": "AI & ML", TensorFlow: "AI & ML", OpenCV: "AI & ML",
+  "AWS Cloud": "Cloud & Tools", Docker: "Cloud & Tools", "Git & GitHub": "Cloud & Tools",
+};
+
 function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
   canvas.width = 512;
@@ -192,6 +202,8 @@ type SphereProps = {
   r?: typeof THREE.MathUtils.randFloatSpread;
   material: THREE.MeshPhysicalMaterial;
   isActive: boolean;
+  focus: "all" | "match" | "dim";
+  onHover: (on: boolean) => void;
 };
 
 function SphereGeo({
@@ -200,8 +212,11 @@ function SphereGeo({
   r = THREE.MathUtils.randFloatSpread,
   material,
   isActive,
+  focus,
+  onHover,
 }: SphereProps) {
   const api = useRef<RapierRigidBody | null>(null);
+  const mesh = useRef<THREE.Mesh>(null);
 
   useFrame((_state, delta) => {
     if (!isActive || !api.current) return;
@@ -210,7 +225,23 @@ function SphereGeo({
     const pos = api.current.translation();
     const distance = Math.sqrt(pos.x * pos.x + pos.y * pos.y + pos.z * pos.z);
 
-    const pullForce = 35 * delta * scale;
+    // shortcut: material is per-brand and each brand has exactly one sphere, so mutating it is safe; revisit if spheres repeat
+    const t = Math.min(1, delta * 6);
+    const dim = focus === "dim";
+    material.opacity = THREE.MathUtils.lerp(material.opacity, dim ? 0.15 : 1, t);
+    material.emissiveIntensity = THREE.MathUtils.lerp(
+      material.emissiveIntensity,
+      dim ? 0.05 : focus === "match" ? 0.9 : 0.45,
+      t
+    );
+    if (mesh.current) {
+      const target = dim ? scale * 0.8 : scale;
+      mesh.current.scale.setScalar(THREE.MathUtils.lerp(mesh.current.scale.x, target, t));
+    }
+
+    // matched spheres gather in the middle, the rest drift out
+    const pull = focus === "match" ? 1.7 : dim ? 0.3 : 1;
+    const pullForce = 35 * delta * scale * pull;
     const impulse = vec
       .set(-pos.x, -pos.y * 1.1, -pos.z)
       .normalize()
@@ -240,11 +271,14 @@ function SphereGeo({
     >
       <BallCollider args={[scale]} />
       <mesh
+        ref={mesh}
         castShadow
         receiveShadow
         scale={scale}
         geometry={sphereGeometry}
         material={material}
+        onPointerOver={() => onHover(true)}
+        onPointerOut={() => onHover(false)}
       />
     </RigidBody>
   );
@@ -285,6 +319,8 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
+  const [filter, setFilter] = useState<Group | "All">("All");
+  const [hovered, setHovered] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -319,6 +355,7 @@ const TechStack = () => {
         clearcoat: 1.0,
         clearcoatRoughness: 0.08,
         reflectivity: 0.9,
+        transparent: true,
       });
     });
   }, []);
@@ -330,8 +367,23 @@ const TechStack = () => {
           My <span>Tech Stack</span>
         </h2>
         <p className="techstack-subtitle">
-          Interactive 3D Physics Sphere • Hover, drag & bump to disperse core technologies
+          Pick a domain to pull its technologies into focus • hover, drag & bump to play
         </p>
+      </div>
+
+      <div className="tech-filters" role="group" aria-label="Filter technologies">
+        {(["All", ...groups] as const).map((g) => (
+          <button
+            key={g}
+            type="button"
+            data-cursor="disable"
+            className={`tech-chip ${filter === g ? "active" : ""}`}
+            aria-pressed={filter === g}
+            onClick={() => setFilter(g)}
+          >
+            {g}
+          </button>
+        ))}
       </div>
 
       <div className="tech-canvas-wrapper">
@@ -362,6 +414,14 @@ const TechStack = () => {
                 scale={props.scale}
                 material={materials[props.brandIndex]}
                 isActive={isActive}
+                focus={
+                  filter === "All"
+                    ? "all"
+                    : groupOf[techBrands[props.brandIndex].name] === filter
+                      ? "match"
+                      : "dim"
+                }
+                onHover={(on) => setHovered(on ? props.brandIndex : null)}
               />
             ))}
           </Physics>
@@ -371,7 +431,18 @@ const TechStack = () => {
             environmentRotation={[0, 4, 2]}
           />
         </Canvas>
-        <div className="tech-canvas-hint">Interactive 3D Canvas • Drag cursor to interact</div>
+        {hovered !== null ? (
+          <div
+            className="tech-canvas-hint active"
+            style={{ "--hintColor": techBrands[hovered].color } as React.CSSProperties}
+          >
+            <i />
+            {techBrands[hovered].name}
+            <span>{groupOf[techBrands[hovered].name]}</span>
+          </div>
+        ) : (
+          <div className="tech-canvas-hint">Interactive 3D Canvas • Drag cursor to interact</div>
+        )}
       </div>
     </div>
   );
