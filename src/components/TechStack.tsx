@@ -8,15 +8,6 @@ import {
   RigidBody,
   RapierRigidBody,
 } from "@react-three/rapier";
-import {
-  FaCode,
-  FaLaptopCode,
-  FaServer,
-  FaDatabase,
-  FaBrain,
-  FaCloud,
-  FaGears,
-} from "react-icons/fa6";
 import "./styles/TechStack.css";
 
 interface TechBrand {
@@ -105,104 +96,6 @@ const techBrands: TechBrand[] = [
     name: "Git & GitHub",
     color: "#F05032",
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#F05032"/><circle cx="44" cy="44" r="12" fill="#ffffff"/><circle cx="44" cy="84" r="12" fill="#ffffff"/><circle cx="84" cy="64" r="12" fill="#ffffff"/><path d="M44 44v40M44 64c20 0 40 0 40 0" stroke="#ffffff" stroke-width="7" fill="none"/></svg>`,
-  },
-];
-
-// Resume skill matrix grouped by exact categories
-interface SkillCategory {
-  title: string;
-  icon: React.ReactNode;
-  accent: string;
-  skills: { name: string; highlight?: boolean }[];
-}
-
-const skillCategories: SkillCategory[] = [
-  {
-    title: "Programming Languages",
-    icon: <FaCode />,
-    accent: "#F7DF1E",
-    skills: [
-      { name: "JavaScript (ES6+)", highlight: true },
-      { name: "Python", highlight: true },
-      { name: "C", highlight: false },
-    ],
-  },
-  {
-    title: "Frontend Engineering",
-    icon: <FaLaptopCode />,
-    accent: "#61DAFB",
-    skills: [
-      { name: "React.js", highlight: true },
-      { name: "React Native", highlight: false },
-      { name: "HTML5", highlight: false },
-      { name: "CSS3", highlight: false },
-      { name: "Responsive UI", highlight: false },
-    ],
-  },
-  {
-    title: "Backend & Systems",
-    icon: <FaServer />,
-    accent: "#5FA04E",
-    skills: [
-      { name: "Node.js", highlight: true },
-      { name: "Express.js", highlight: true },
-      { name: "FastAPI", highlight: true },
-      { name: "RESTful API Design", highlight: true },
-      { name: "JWT Authentication", highlight: false },
-      { name: "RBAC", highlight: false },
-    ],
-  },
-  {
-    title: "Databases & Storage",
-    icon: <FaDatabase />,
-    accent: "#3ECF8E",
-    skills: [
-      { name: "MongoDB", highlight: true },
-      { name: "SQL", highlight: true },
-      { name: "PostgreSQL / Supabase", highlight: true },
-      { name: "Aggregation Pipelines", highlight: false },
-      { name: "Indexing Strategies", highlight: false },
-    ],
-  },
-  {
-    title: "AI, ML & Deep Learning",
-    icon: <FaBrain />,
-    accent: "#A87CFF",
-    skills: [
-      { name: "LLM & RAG Integration", highlight: true },
-      { name: "Generative AI", highlight: true },
-      { name: "TensorFlow", highlight: true },
-      { name: "OpenCV", highlight: true },
-      { name: "Grad-CAM Heatmaps", highlight: false },
-      { name: "Pandas", highlight: false },
-      { name: "NumPy", highlight: false },
-    ],
-  },
-  {
-    title: "Tools, DevOps & Cloud",
-    icon: <FaCloud />,
-    accent: "#2496ED",
-    skills: [
-      { name: "Git", highlight: false },
-      { name: "GitHub", highlight: true },
-      { name: "AWS Cloud", highlight: true },
-      { name: "Docker", highlight: true },
-      { name: "Postman", highlight: false },
-      { name: "Jest", highlight: false },
-      { name: "Twilio API", highlight: false },
-    ],
-  },
-  {
-    title: "Engineering Fundamentals",
-    icon: <FaGears />,
-    accent: "#FF9900",
-    skills: [
-      { name: "Data Structures & Algorithms", highlight: true },
-      { name: "System Design", highlight: true },
-      { name: "Agile / SDLC", highlight: false },
-      { name: "Unit Testing", highlight: false },
-      { name: "Code Review", highlight: false },
-    ],
   },
 ];
 
@@ -469,35 +362,6 @@ const TechStack = () => {
           />
         </Canvas>
         <div className="tech-canvas-hint">Interactive 3D Canvas • Drag cursor to interact</div>
-      </div>
-
-      {/* Categorized Technical Skills Matrix */}
-      <div className="tech-matrix-section">
-        <div className="tech-matrix-title">Technical Skills & Ecosystem</div>
-        <div className="tech-grid">
-          {skillCategories.map((category, index) => (
-            <div
-              className="tech-card"
-              key={index}
-              style={{ "--cardAccent": category.accent } as React.CSSProperties}
-            >
-              <div className="tech-card-header">
-                <div className="tech-card-icon">{category.icon}</div>
-                <h3 className="tech-card-title">{category.title}</h3>
-              </div>
-              <div className="tech-badges-wrap">
-                {category.skills.map((skill, sIdx) => (
-                  <span
-                    className={`tech-badge ${skill.highlight ? "highlight" : ""}`}
-                    key={sIdx}
-                  >
-                    {skill.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
