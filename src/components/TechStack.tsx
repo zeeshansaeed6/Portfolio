@@ -110,25 +110,23 @@ const groupOf: Record<string, (typeof groups)[number]> = {
 };
 
 const icon = (b: TechBrand) => `data:image/svg+xml;utf8,${encodeURIComponent(b.svg)}`;
-const STEP = 2.6; // seconds each command block takes
-const TYPE = 1.1; // seconds to type a command
+const STEP = 2.3; // seconds each command block takes
+const TYPE = 0.95; // seconds to type a command
 
 const Prompt = () => (
   <span className="term-prompt">
-    <b className="u">zeeshan</b>
-    <i>@</i>
-    <b className="h">portfolio</b>
-    <i>:</i>
-    <b className="p">~/stack</b>
-    <i>$</i>
+    <b>~/stack</b>
+    <i>❯</i>
   </span>
 );
 
 const TechStack = () => {
   const [go, setGo] = useState(false);
+  const [done, setDone] = useState(false);
   const [run, setRun] = useState(0);
   const [hovered, setHovered] = useState<TechBrand | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const termRef = useRef<HTMLDivElement>(null);
 
   // start typing the first time the window scrolls into view
   useEffect(() => {
@@ -147,6 +145,15 @@ const TechStack = () => {
     return () => io.disconnect();
   }, []);
 
+  // soft spotlight that follows the cursor over the window
+  const onMove = (e: React.MouseEvent) => {
+    const t = termRef.current;
+    if (!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    t.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <div className="techstack" id="techstack">
       <div className="techstack-header">
@@ -156,36 +163,43 @@ const TechStack = () => {
         <p className="techstack-subtitle">Everything I ship with, straight from the terminal</p>
       </div>
 
-      <div className="term-wrap" ref={ref}>
+      <div className={`term-wrap ${go ? "in" : ""}`} ref={ref}>
         <div className="term-glow" />
-        <div className="term">
+        <div className="term" ref={termRef} onMouseMove={onMove}>
           <div className="term-bar">
             <span className="dots">
               <i /> <i /> <i />
             </span>
-            <span className="term-title">zeeshan@portfolio: ~/stack</span>
+            <span className="term-title">zeeshan@portfolio — stack</span>
             <button
               type="button"
               data-cursor="disable"
               className="term-replay"
               onClick={() => {
+                setDone(false);
                 setGo(true);
                 setRun((r) => r + 1);
               }}
               aria-label="Replay animation"
+              title="Replay"
             >
-              ↻ replay
+              ↻
             </button>
           </div>
 
-          <div key={run} className={`term-body ${go ? "go" : ""}`}>
-            <p className="term-comment"># {techBrands.length} technologies • {groups.length} domains • 0 errors</p>
+          <div
+            key={run}
+            className={`term-body ${go ? "go" : ""} ${done ? "done" : ""}`}
+            onClick={() => go && setDone(true)}
+          >
+            <p className="term-comment"># {techBrands.length} technologies across {groups.length} domains</p>
 
             {groups.map((g, gi) => {
               const cmd = `stack --list "${g}"`;
               const start = 0.4 + gi * STEP;
+              const items = techBrands.filter((b) => groupOf[b.name] === g);
               return (
-                <div className="term-block" key={g}>
+                <div className="term-block" key={g} style={{ "--d": `${start}s` } as React.CSSProperties}>
                   <div className="term-line">
                     <Prompt />
                     <span
@@ -194,26 +208,29 @@ const TechStack = () => {
                     >
                       {cmd}
                     </span>
+                    <span className="cmd-note" style={{ "--d": `${start + TYPE}s` } as React.CSSProperties}>
+                      {items.length} found
+                    </span>
                   </div>
                   <div className="term-out">
-                    {techBrands
-                      .filter((b) => groupOf[b.name] === g)
-                      .map((b, i) => (
-                        <button
-                          key={b.name}
-                          type="button"
-                          data-cursor="disable"
-                          className="term-chip"
-                          style={{ "--c": b.color, "--d": `${start + TYPE + 0.1 + i * 0.12}s` } as React.CSSProperties}
-                          onMouseEnter={() => setHovered(b)}
-                          onMouseLeave={() => setHovered(null)}
-                          onFocus={() => setHovered(b)}
-                          onBlur={() => setHovered(null)}
-                        >
+                    {items.map((b, i) => (
+                      <button
+                        key={b.name}
+                        type="button"
+                        data-cursor="disable"
+                        className="term-chip"
+                        style={{ "--c": b.color, "--d": `${start + TYPE + 0.1 + i * 0.1}s` } as React.CSSProperties}
+                        onMouseEnter={() => setHovered(b)}
+                        onMouseLeave={() => setHovered(null)}
+                        onFocus={() => setHovered(b)}
+                        onBlur={() => setHovered(null)}
+                      >
+                        <span className="tile">
                           <img src={icon(b)} alt="" loading="lazy" draggable={false} />
-                          {b.name}
-                        </button>
-                      ))}
+                        </span>
+                        {b.name}
+                      </button>
+                    ))}
                   </div>
                 </div>
               );
@@ -226,11 +243,13 @@ const TechStack = () => {
           </div>
 
           <div className="term-status">
-            <span>⎇ main</span>
-            <span className="term-hover" style={{ color: hovered?.color }}>
-              {hovered ? `→ ${hovered.name} · ${groupOf[hovered.name]}` : "✓ all systems ready"}
+            <span className="ready">
+              <i /> ready
             </span>
-            <span>{techBrands.length} loaded</span>
+            <span className="term-hover" style={{ color: hovered?.color }}>
+              {hovered ? `${hovered.name}  ·  ${groupOf[hovered.name]}` : "hover a tool • click to skip the typing"}
+            </span>
+            <span>{techBrands.length} tools</span>
           </div>
         </div>
       </div>
