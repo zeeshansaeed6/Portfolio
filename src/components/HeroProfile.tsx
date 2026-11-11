@@ -39,7 +39,7 @@ const HeroProfile = () => {
     }
 
     // 2. Interactive 3D Perspective Tilt on Mouse Movement
-    let rafId: number;
+    let rafId: number | null = null;
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
@@ -51,6 +51,7 @@ const HeroProfile = () => {
       const centerY = window.innerHeight / 2;
       targetX = (e.clientX - centerX) / centerX;
       targetY = (e.clientY - centerY) / centerY;
+      if (!rafId) rafId = requestAnimationFrame(animateTilt); // restart the loop after it went idle
     };
 
     const animateTilt = () => {
@@ -74,6 +75,11 @@ const HeroProfile = () => {
         rimRef.current.style.transform = `translate(calc(-50% + ${currentX * 12}px), calc(-50% + ${currentY * 10}px)) scale(1.02)`;
       }
 
+      // idle once settled, so phones and still mice do no per-frame work
+      if (Math.abs(targetX - currentX) < 0.001 && Math.abs(targetY - currentY) < 0.001) {
+        rafId = null;
+        return;
+      }
       rafId = requestAnimationFrame(animateTilt);
     };
 
@@ -90,7 +96,7 @@ const HeroProfile = () => {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, [setLoading]);
 

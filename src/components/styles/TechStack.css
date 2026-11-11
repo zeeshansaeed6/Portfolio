@@ -406,6 +406,18 @@
 }
 
 @media (max-width: 900px) {
+  .techstack {
+    min-height: 0;
+    padding: 40px 0 70px;
+  }
+  /* cheaper on phones: no live blur, no animated glow */
+  .term {
+    backdrop-filter: none;
+  }
+  .term-glow {
+    animation: none;
+    filter: blur(30px);
+  }
   .techstack-header h2 {
     font-size: 40px;
   }
@@ -424,12 +436,17 @@
     gap: 8px;
   }
   .term-chip {
-    font-size: 12px;
-    padding-right: 11px;
+    font-size: 11px;
+    gap: 7px;
+    padding: 4px 9px 4px 4px;
   }
   .term-chip .tile {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
+  }
+  .term-chip img {
+    width: 14px;
+    height: 14px;
   }
   .cmd-note,
   .term-title {
