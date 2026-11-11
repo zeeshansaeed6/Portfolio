@@ -1,13 +1,4 @@
-import * as THREE from "three";
-import { useRef, useMemo, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
-import {
-  BallCollider,
-  Physics,
-  RigidBody,
-  RapierRigidBody,
-} from "@react-three/rapier";
+import { useState } from "react";
 import "./styles/TechStack.css";
 
 interface TechBrand {
@@ -54,8 +45,8 @@ const techBrands: TechBrand[] = [
   },
   {
     name: "PostgreSQL",
-    color: "#3ECF8E",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#1C1C1C"/><path fill="#3ECF8E" d="M68 18c-3-4-9-2-10 3l-18 42c-2 4 1 8 5 8h22l-10 39c-2 6 5 9 8 5l30-42c3-4 0-9-5-9H68l8-41c1-2 0-4-2-5z"/></svg>`,
+    color: "#4F8FCB",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="24" fill="#336791"/><path fill="#ffffff" d="M64 22c-18 0-30 9-30 24 0 10 4 16 8 22-1 8-3 18 0 24 2 5 7 6 9 2 2-4 1-12 2-18 3 1 7 1 11 0 1 6 0 14 2 18 2 4 7 3 9-2 3-6 1-16 0-24 4-6 8-12 8-22 0-15-12-24-29-24zm-9 18a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm18 0a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>`,
   },
   {
     name: "SQL",
@@ -109,269 +100,112 @@ const techBrands: TechBrand[] = [
   },
 ];
 
-function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
-  const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 256;
-  const ctx = canvas.getContext("2d")!;
-
-  ctx.fillStyle = "#0c0a12";
-  ctx.fillRect(0, 0, 512, 256);
-
-  const img = new Image();
-  img.src = `data:image/svg+xml;utf8,${encodeURIComponent(brand.svg)}`;
-
-  const render = () => {
-    ctx.fillStyle = "#0c0a12";
-    ctx.fillRect(0, 0, 512, 256);
-
-    [128, 384].forEach((cx) => {
-      const cy = 128;
-
-      // Color aura glow
-      const grad = ctx.createRadialGradient(cx, cy - 6, 10, cx, cy - 6, 95);
-      grad.addColorStop(0, brand.color + "55");
-      grad.addColorStop(0.5, brand.color + "18");
-      grad.addColorStop(1, "transparent");
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(cx, cy - 6, 95, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Dark badge plate
-      ctx.fillStyle = "#16131e";
-      ctx.strokeStyle = brand.color + "AA";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.arc(cx, cy - 8, 62, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-
-      // Draw real SVG icon
-      if (img.complete && img.naturalWidth !== 0) {
-        const iconSize = 72;
-        ctx.drawImage(img, cx - iconSize / 2, cy - iconSize / 2 - 8, iconSize, iconSize);
-      }
-
-      // Brand Label Text
-      ctx.font = "900 16px Geist, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillStyle = "#ffffff";
-      ctx.shadowColor = brand.color;
-      ctx.shadowBlur = 6;
-      ctx.fillText(brand.name, cx, cy + 40);
-      ctx.shadowBlur = 0;
-    });
-  };
-
-  img.onload = () => {
-    render();
-    texture.needsUpdate = true;
-  };
-
-  render();
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.needsUpdate = true;
-  return texture;
-}
-
-const sphereGeometry = new THREE.SphereGeometry(1, 24, 24);
-
-const sphereScales = [0.95, 1.05, 1.15, 0.9, 1.0, 1.1];
-const spheres = [...Array(techBrands.length)].map((_, i) => ({
-  scale: sphereScales[i % sphereScales.length],
-  brandIndex: i % techBrands.length,
-}));
-
-type SphereProps = {
-  vec?: THREE.Vector3;
-  scale: number;
-  r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
-  isActive: boolean;
+const groups = ["Languages", "Web & APIs", "Data", "AI & ML", "Cloud & Tools"] as const;
+type Group = (typeof groups)[number];
+const groupOf: Record<string, Group> = {
+  JavaScript: "Languages", Python: "Languages", TypeScript: "Languages", "C Language": "Languages",
+  "React.js": "Web & APIs", "Node.js": "Web & APIs", "Express.js": "Web & APIs", FastAPI: "Web & APIs",
+  MongoDB: "Data", PostgreSQL: "Data", SQL: "Data", Supabase: "Data",
+  "GenAI & LLM": "AI & ML", TensorFlow: "AI & ML", OpenCV: "AI & ML",
+  "AWS Cloud": "Cloud & Tools", Docker: "Cloud & Tools", "Git & GitHub": "Cloud & Tools",
 };
 
-function SphereGeo({
-  vec = new THREE.Vector3(),
-  scale,
-  r = THREE.MathUtils.randFloatSpread,
-  material,
-  isActive,
-}: SphereProps) {
-  const api = useRef<RapierRigidBody | null>(null);
+// inner ring = foundations, middle = build, outer = intelligence & delivery
+const rings: { size: number; duration: number; reverse: boolean; groups: Group[] }[] = [
+  { size: 44, duration: 40, reverse: false, groups: ["Languages"] },
+  { size: 72, duration: 60, reverse: true, groups: ["Web & APIs", "Data"] },
+  { size: 98, duration: 85, reverse: false, groups: ["AI & ML", "Cloud & Tools"] },
+];
 
-  useFrame((_state, delta) => {
-    if (!isActive || !api.current) return;
-    delta = Math.min(0.08, delta);
-
-    const pos = api.current.translation();
-    const distance = Math.sqrt(pos.x * pos.x + pos.y * pos.y + pos.z * pos.z);
-
-    const pullForce = 35 * delta * scale;
-    const impulse = vec
-      .set(-pos.x, -pos.y * 1.1, -pos.z)
-      .normalize()
-      .multiplyScalar(pullForce * Math.min(distance, 8));
-
-    api.current.applyImpulse(impulse, true);
-
-    api.current.applyTorqueImpulse(
-      new THREE.Vector3(
-        0.0012 * scale,
-        0.0025 * scale,
-        0.0008 * scale
-      ),
-      true
-    );
-  });
-
-  return (
-    <RigidBody
-      linearDamping={0.65}
-      angularDamping={0.3}
-      friction={0.2}
-      restitution={0.7}
-      position={[r(14), r(10), r(10) - 3]}
-      ref={api}
-      colliders={false}
-    >
-      <BallCollider args={[scale]} />
-      <mesh
-        castShadow
-        receiveShadow
-        scale={scale}
-        geometry={sphereGeometry}
-        material={material}
-      />
-    </RigidBody>
-  );
-}
-
-type PointerProps = {
-  vec?: THREE.Vector3;
-  isActive: boolean;
-};
-
-function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
-  const ref = useRef<RapierRigidBody>(null);
-
-  useFrame(({ pointer, viewport }) => {
-    if (!isActive || !ref.current) return;
-    const targetVec = vec.lerp(
-      new THREE.Vector3(
-        (pointer.x * viewport.width) / 2,
-        (pointer.y * viewport.height) / 2,
-        0
-      ),
-      0.22
-    );
-    ref.current.setNextKinematicTranslation(targetVec);
-  });
-
-  return (
-    <RigidBody
-      position={[100, 100, 100]}
-      type="kinematicPosition"
-      colliders={false}
-      ref={ref}
-    >
-      <BallCollider args={[2.2]} />
-    </RigidBody>
-  );
-}
+const icon = (b: TechBrand) => `data:image/svg+xml;utf8,${encodeURIComponent(b.svg)}`;
 
 const TechStack = () => {
-  const [isActive, setIsActive] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsActive(entry.isIntersecting);
-        });
-      },
-      { rootMargin: "150px" }
-    );
-
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  const materials = useMemo(() => {
-    return techBrands.map((brand) => {
-      const texture = createBrandTexture(brand);
-      return new THREE.MeshPhysicalMaterial({
-        map: texture,
-        emissive: "#1e1a24",
-        emissiveMap: texture,
-        emissiveIntensity: 0.45,
-        metalness: 0.15,
-        roughness: 0.18,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.08,
-        reflectivity: 0.9,
-      });
-    });
-  }, []);
+  const [filter, setFilter] = useState<Group | "All">("All");
+  const [hovered, setHovered] = useState<TechBrand | null>(null);
 
   return (
-    <div className="techstack" ref={containerRef} id="techstack">
+    <div className="techstack" id="techstack">
       <div className="techstack-header">
         <h2>
           My <span>Tech Stack</span>
         </h2>
         <p className="techstack-subtitle">
-          Interactive 3D Physics Sphere • Hover, drag & bump to disperse core technologies
+          Three orbits of tools I build with • hover a planet to explore, pick a domain to light it up
         </p>
       </div>
 
-      <div className="tech-canvas-wrapper">
-        <Canvas
-          shadows
-          dpr={[1, 1.5]}
-          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-          camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-          onCreated={(state) => (state.gl.toneMappingExposure = 1.45)}
-          className="tech-canvas"
-        >
-          <ambientLight intensity={1.3} />
-          <spotLight
-            position={[20, 25, 25]}
-            penumbra={1}
-            angle={0.25}
-            color="#ffffff"
-            castShadow
-            shadow-mapSize={[512, 512]}
-          />
-          <directionalLight position={[-10, 10, 10]} intensity={1.5} color="#e0d4ff" />
-          <directionalLight position={[0, -10, -5]} intensity={1.0} color="#7f60f9" />
-          <Physics gravity={[0, 0, 0]}>
-            <Pointer isActive={isActive} />
-            {spheres.map((props, i) => (
-              <SphereGeo
-                key={i}
-                scale={props.scale}
-                material={materials[props.brandIndex]}
-                isActive={isActive}
-              />
-            ))}
-          </Physics>
-          <Environment
-            files="/models/char_enviorment.hdr"
-            environmentIntensity={0.65}
-            environmentRotation={[0, 4, 2]}
-          />
-        </Canvas>
-        <div className="tech-canvas-hint">Interactive 3D Canvas • Drag cursor to interact</div>
+      <div className="tech-filters" role="group" aria-label="Filter technologies">
+        {(["All", ...groups] as const).map((g) => (
+          <button
+            key={g}
+            type="button"
+            data-cursor="disable"
+            className={`tech-chip ${filter === g ? "active" : ""}`}
+            aria-pressed={filter === g}
+            onClick={() => setFilter(g)}
+          >
+            {g}
+          </button>
+        ))}
+      </div>
+
+      <div className={`orbit-stage ${hovered ? "paused" : ""}`}>
+        <div className="orbit-glow" />
+
+        {rings.map((ring, ri) => {
+          const items = techBrands.filter((b) => ring.groups.includes(groupOf[b.name]));
+          return (
+            <div
+              key={ri}
+              className={`orbit-ring ${ring.reverse ? "ccw" : "cw"}`}
+              style={{ "--size": `${ring.size}%`, "--dur": `${ring.duration}s` } as React.CSSProperties}
+            >
+              {items.map((brand, i) => {
+                const angle = (i / items.length) * Math.PI * 2 + ri * 0.6;
+                const match = filter === "All" || groupOf[brand.name] === filter;
+                return (
+                  <div
+                    key={brand.name}
+                    className="orbit-slot"
+                    style={{ left: `${50 + 50 * Math.cos(angle)}%`, top: `${50 + 50 * Math.sin(angle)}%` }}
+                  >
+                    <div className="orbit-badge">
+                      <button
+                        type="button"
+                        data-cursor="disable"
+                        className={`orbit-planet ${match ? "" : "dim"} ${hovered === brand ? "hot" : ""}`}
+                        style={{ "--c": brand.color } as React.CSSProperties}
+                        aria-label={`${brand.name} (${groupOf[brand.name]})`}
+                        onMouseEnter={() => setHovered(brand)}
+                        onMouseLeave={() => setHovered(null)}
+                        onFocus={() => setHovered(brand)}
+                        onBlur={() => setHovered(null)}
+                        onClick={() => setHovered(hovered === brand ? null : brand)}
+                      >
+                        <img src={icon(brand)} alt="" loading="lazy" draggable={false} />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+
+        <div className="orbit-core" style={{ "--c": hovered?.color ?? "#a87cff" } as React.CSSProperties}>
+          {hovered ? (
+            <>
+              <img src={icon(hovered)} alt="" />
+              <strong>{hovered.name}</strong>
+              <span>{groupOf[hovered.name]}</span>
+            </>
+          ) : (
+            <>
+              <strong>Full-Stack</strong>
+              <span>+ AI</span>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
