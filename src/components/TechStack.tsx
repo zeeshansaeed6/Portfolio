@@ -97,6 +97,16 @@ const techBrands: TechBrand[] = [
     color: "#F05032",
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#F05032"/><circle cx="44" cy="44" r="12" fill="#ffffff"/><circle cx="44" cy="84" r="12" fill="#ffffff"/><circle cx="84" cy="64" r="12" fill="#ffffff"/><path d="M44 44v40M44 64c20 0 40 0 40 0" stroke="#ffffff" stroke-width="7" fill="none"/></svg>`,
   },
+  {
+    name: "TypeScript",
+    color: "#3178C6",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="14" fill="#3178C6"/><path fill="#ffffff" d="M22 62h42v10H48v38H38V72H22V62zm50 40 6-8c4 4 9 6 14 6 5 0 8-2 8-5 0-4-4-5-11-8-8-3-14-7-14-15 0-8 7-14 17-14 7 0 12 2 17 6l-6 8c-4-3-8-5-12-5-4 0-7 2-7 4 0 4 4 5 11 8 9 3 14 7 14 15 0 9-8 15-18 15-8 0-14-3-19-7z"/></svg>`,
+  },
+  {
+    name: "Supabase",
+    color: "#3ECF8E",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#3ECF8E" d="M75 118c-3 4-10 1-10-4V76h46c6 0 9 7 5 11L75 118z"/><path fill="#249361" d="M53 10c3-4 10-1 10 4v38H17c-6 0-9-7-5-11L53 10z"/></svg>`,
+  },
 ];
 
 function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
@@ -171,7 +181,7 @@ function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
 const sphereGeometry = new THREE.SphereGeometry(1, 24, 24);
 
 const sphereScales = [0.95, 1.05, 1.15, 0.9, 1.0, 1.1];
-const spheres = [...Array(16)].map((_, i) => ({
+const spheres = [...Array(techBrands.length)].map((_, i) => ({
   scale: sphereScales[i % sphereScales.length],
   brandIndex: i % techBrands.length,
 }));
