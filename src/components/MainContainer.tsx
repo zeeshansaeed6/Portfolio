@@ -10,10 +10,12 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText from "./utils/splitText";
 import EmailToast from "./EmailToast";
+import { useLoading } from "../context/LoadingProvider";
 
 const TechStack = lazy(() => import("./TechStack"));
 
 const MainContainer = ({ children }: PropsWithChildren) => {
+  const { isLoading } = useLoading();
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
     window.innerWidth > 1024
   );
@@ -46,7 +48,8 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Career />
             <Work />
             <Suspense fallback={<div>Loading....</div>}>
-              <TechStack />
+              {/* defer the ~3MB 3D chunk until the hero has finished loading */}
+              {!isLoading && <TechStack />}
             </Suspense>
             <Contact />
           </div>
