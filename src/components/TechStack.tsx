@@ -1,13 +1,4 @@
-import * as THREE from "three";
-import { useRef, useMemo, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
-import {
-  BallCollider,
-  Physics,
-  RigidBody,
-  RapierRigidBody,
-} from "@react-three/rapier";
+import { useEffect, useRef, useState } from "react";
 import "./styles/TechStack.css";
 
 interface TechBrand {
@@ -54,8 +45,8 @@ const techBrands: TechBrand[] = [
   },
   {
     name: "PostgreSQL",
-    color: "#3ECF8E",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="20" fill="#1C1C1C"/><path fill="#3ECF8E" d="M68 18c-3-4-9-2-10 3l-18 42c-2 4 1 8 5 8h22l-10 39c-2 6 5 9 8 5l30-42c3-4 0-9-5-9H68l8-41c1-2 0-4-2-5z"/></svg>`,
+    color: "#4F8FCB",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="24" fill="#336791"/><path fill="#ffffff" d="M64 22c-18 0-30 9-30 24 0 10 4 16 8 22-1 8-3 18 0 24 2 5 7 6 9 2 2-4 1-12 2-18 3 1 7 1 11 0 1 6 0 14 2 18 2 4 7 3 9-2 3-6 1-16 0-24 4-6 8-12 8-22 0-15-12-24-29-24zm-9 18a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm18 0a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>`,
   },
   {
     name: "SQL",
@@ -109,269 +100,158 @@ const techBrands: TechBrand[] = [
   },
 ];
 
-function createBrandTexture(brand: TechBrand): THREE.CanvasTexture {
-  const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 256;
-  const ctx = canvas.getContext("2d")!;
-
-  ctx.fillStyle = "#0c0a12";
-  ctx.fillRect(0, 0, 512, 256);
-
-  const img = new Image();
-  img.src = `data:image/svg+xml;utf8,${encodeURIComponent(brand.svg)}`;
-
-  const render = () => {
-    ctx.fillStyle = "#0c0a12";
-    ctx.fillRect(0, 0, 512, 256);
-
-    [128, 384].forEach((cx) => {
-      const cy = 128;
-
-      // Color aura glow
-      const grad = ctx.createRadialGradient(cx, cy - 6, 10, cx, cy - 6, 95);
-      grad.addColorStop(0, brand.color + "55");
-      grad.addColorStop(0.5, brand.color + "18");
-      grad.addColorStop(1, "transparent");
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(cx, cy - 6, 95, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Dark badge plate
-      ctx.fillStyle = "#16131e";
-      ctx.strokeStyle = brand.color + "AA";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.arc(cx, cy - 8, 62, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-
-      // Draw real SVG icon
-      if (img.complete && img.naturalWidth !== 0) {
-        const iconSize = 72;
-        ctx.drawImage(img, cx - iconSize / 2, cy - iconSize / 2 - 8, iconSize, iconSize);
-      }
-
-      // Brand Label Text
-      ctx.font = "900 16px Geist, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillStyle = "#ffffff";
-      ctx.shadowColor = brand.color;
-      ctx.shadowBlur = 6;
-      ctx.fillText(brand.name, cx, cy + 40);
-      ctx.shadowBlur = 0;
-    });
-  };
-
-  img.onload = () => {
-    render();
-    texture.needsUpdate = true;
-  };
-
-  render();
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.needsUpdate = true;
-  return texture;
-}
-
-const sphereGeometry = new THREE.SphereGeometry(1, 24, 24);
-
-const sphereScales = [0.95, 1.05, 1.15, 0.9, 1.0, 1.1];
-const spheres = [...Array(techBrands.length)].map((_, i) => ({
-  scale: sphereScales[i % sphereScales.length],
-  brandIndex: i % techBrands.length,
-}));
-
-type SphereProps = {
-  vec?: THREE.Vector3;
-  scale: number;
-  r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
-  isActive: boolean;
+const groups = ["Languages", "Web & APIs", "Data", "AI & ML", "Cloud & Tools"] as const;
+const groupOf: Record<string, (typeof groups)[number]> = {
+  JavaScript: "Languages", Python: "Languages", TypeScript: "Languages", "C Language": "Languages",
+  "React.js": "Web & APIs", "Node.js": "Web & APIs", "Express.js": "Web & APIs", FastAPI: "Web & APIs",
+  MongoDB: "Data", PostgreSQL: "Data", SQL: "Data", Supabase: "Data",
+  "GenAI & LLM": "AI & ML", TensorFlow: "AI & ML", OpenCV: "AI & ML",
+  "AWS Cloud": "Cloud & Tools", Docker: "Cloud & Tools", "Git & GitHub": "Cloud & Tools",
 };
 
-function SphereGeo({
-  vec = new THREE.Vector3(),
-  scale,
-  r = THREE.MathUtils.randFloatSpread,
-  material,
-  isActive,
-}: SphereProps) {
-  const api = useRef<RapierRigidBody | null>(null);
+const icon = (b: TechBrand) => `data:image/svg+xml;utf8,${encodeURIComponent(b.svg)}`;
+const STEP = 2.3; // seconds each command block takes
+const TYPE = 0.95; // seconds to type a command
 
-  useFrame((_state, delta) => {
-    if (!isActive || !api.current) return;
-    delta = Math.min(0.08, delta);
-
-    const pos = api.current.translation();
-    const distance = Math.sqrt(pos.x * pos.x + pos.y * pos.y + pos.z * pos.z);
-
-    const pullForce = 35 * delta * scale;
-    const impulse = vec
-      .set(-pos.x, -pos.y * 1.1, -pos.z)
-      .normalize()
-      .multiplyScalar(pullForce * Math.min(distance, 8));
-
-    api.current.applyImpulse(impulse, true);
-
-    api.current.applyTorqueImpulse(
-      new THREE.Vector3(
-        0.0012 * scale,
-        0.0025 * scale,
-        0.0008 * scale
-      ),
-      true
-    );
-  });
-
-  return (
-    <RigidBody
-      linearDamping={0.65}
-      angularDamping={0.3}
-      friction={0.2}
-      restitution={0.7}
-      position={[r(14), r(10), r(10) - 3]}
-      ref={api}
-      colliders={false}
-    >
-      <BallCollider args={[scale]} />
-      <mesh
-        castShadow
-        receiveShadow
-        scale={scale}
-        geometry={sphereGeometry}
-        material={material}
-      />
-    </RigidBody>
-  );
-}
-
-type PointerProps = {
-  vec?: THREE.Vector3;
-  isActive: boolean;
-};
-
-function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
-  const ref = useRef<RapierRigidBody>(null);
-
-  useFrame(({ pointer, viewport }) => {
-    if (!isActive || !ref.current) return;
-    const targetVec = vec.lerp(
-      new THREE.Vector3(
-        (pointer.x * viewport.width) / 2,
-        (pointer.y * viewport.height) / 2,
-        0
-      ),
-      0.22
-    );
-    ref.current.setNextKinematicTranslation(targetVec);
-  });
-
-  return (
-    <RigidBody
-      position={[100, 100, 100]}
-      type="kinematicPosition"
-      colliders={false}
-      ref={ref}
-    >
-      <BallCollider args={[2.2]} />
-    </RigidBody>
-  );
-}
+const Prompt = () => (
+  <span className="term-prompt">
+    <b>~/stack</b>
+    <i>❯</i>
+  </span>
+);
 
 const TechStack = () => {
-  const [isActive, setIsActive] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [go, setGo] = useState(false);
+  const [done, setDone] = useState(false);
+  const [run, setRun] = useState(0);
+  const [hovered, setHovered] = useState<TechBrand | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const termRef = useRef<HTMLDivElement>(null);
 
+  // start typing the first time the window scrolls into view
   useEffect(() => {
-    const el = containerRef.current;
+    const el = ref.current;
     if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsActive(entry.isIntersecting);
-        });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setGo(true);
+          io.disconnect();
+        }
       },
-      { rootMargin: "150px" }
+      { threshold: 0.35 }
     );
-
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-    };
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
-  const materials = useMemo(() => {
-    return techBrands.map((brand) => {
-      const texture = createBrandTexture(brand);
-      return new THREE.MeshPhysicalMaterial({
-        map: texture,
-        emissive: "#1e1a24",
-        emissiveMap: texture,
-        emissiveIntensity: 0.45,
-        metalness: 0.15,
-        roughness: 0.18,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.08,
-        reflectivity: 0.9,
-      });
-    });
-  }, []);
+  // soft spotlight that follows the cursor over the window
+  const onMove = (e: React.MouseEvent) => {
+    const t = termRef.current;
+    if (!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    t.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
 
   return (
-    <div className="techstack" ref={containerRef} id="techstack">
+    <div className="techstack" id="techstack">
       <div className="techstack-header">
         <h2>
           My <span>Tech Stack</span>
         </h2>
-        <p className="techstack-subtitle">
-          Interactive 3D Physics Sphere • Hover, drag & bump to disperse core technologies
-        </p>
+        <p className="techstack-subtitle">Everything I ship with, straight from the terminal</p>
       </div>
 
-      <div className="tech-canvas-wrapper">
-        <Canvas
-          shadows
-          dpr={[1, 1.5]}
-          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-          camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-          onCreated={(state) => (state.gl.toneMappingExposure = 1.45)}
-          className="tech-canvas"
-        >
-          <ambientLight intensity={1.3} />
-          <spotLight
-            position={[20, 25, 25]}
-            penumbra={1}
-            angle={0.25}
-            color="#ffffff"
-            castShadow
-            shadow-mapSize={[512, 512]}
-          />
-          <directionalLight position={[-10, 10, 10]} intensity={1.5} color="#e0d4ff" />
-          <directionalLight position={[0, -10, -5]} intensity={1.0} color="#7f60f9" />
-          <Physics gravity={[0, 0, 0]}>
-            <Pointer isActive={isActive} />
-            {spheres.map((props, i) => (
-              <SphereGeo
-                key={i}
-                scale={props.scale}
-                material={materials[props.brandIndex]}
-                isActive={isActive}
-              />
-            ))}
-          </Physics>
-          <Environment
-            files="/models/char_enviorment.hdr"
-            environmentIntensity={0.65}
-            environmentRotation={[0, 4, 2]}
-          />
-        </Canvas>
-        <div className="tech-canvas-hint">Interactive 3D Canvas • Drag cursor to interact</div>
+      <div className={`term-wrap ${go ? "in" : ""}`} ref={ref}>
+        <div className="term-glow" />
+        <div className="term" ref={termRef} onMouseMove={onMove}>
+          <div className="term-bar">
+            <span className="dots">
+              <i /> <i /> <i />
+            </span>
+            <span className="term-title">zeeshan@portfolio — stack</span>
+            <button
+              type="button"
+              data-cursor="disable"
+              className="term-replay"
+              onClick={() => {
+                setDone(false);
+                setGo(true);
+                setRun((r) => r + 1);
+              }}
+              aria-label="Replay animation"
+              title="Replay"
+            >
+              ↻
+            </button>
+          </div>
+
+          <div
+            key={run}
+            className={`term-body ${go ? "go" : ""} ${done ? "done" : ""}`}
+            onClick={() => go && setDone(true)}
+          >
+            <p className="term-comment"># {techBrands.length} technologies across {groups.length} domains</p>
+
+            {groups.map((g, gi) => {
+              const cmd = `stack --list "${g}"`;
+              const start = 0.4 + gi * STEP;
+              const items = techBrands.filter((b) => groupOf[b.name] === g);
+              return (
+                <div className="term-block" key={g} style={{ "--d": `${start}s` } as React.CSSProperties}>
+                  <div className="term-line">
+                    <Prompt />
+                    <span
+                      className="cmd"
+                      style={{ "--n": cmd.length, "--cd": `${start}s`, "--td": `${TYPE}s` } as React.CSSProperties}
+                    >
+                      {cmd}
+                    </span>
+                    <span className="cmd-note" style={{ "--d": `${start + TYPE}s` } as React.CSSProperties}>
+                      {items.length} found
+                    </span>
+                  </div>
+                  <div className="term-out">
+                    {items.map((b, i) => (
+                      <button
+                        key={b.name}
+                        type="button"
+                        data-cursor="disable"
+                        className="term-chip"
+                        style={{ "--c": b.color, "--d": `${start + TYPE + 0.1 + i * 0.1}s` } as React.CSSProperties}
+                        onMouseEnter={() => setHovered(b)}
+                        onMouseLeave={() => setHovered(null)}
+                        onFocus={() => setHovered(b)}
+                        onBlur={() => setHovered(null)}
+                      >
+                        <span className="tile">
+                          <img src={icon(b)} alt="" loading="lazy" draggable={false} />
+                        </span>
+                        {b.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+
+            <div className="term-line term-final" style={{ "--d": `${0.4 + groups.length * STEP}s` } as React.CSSProperties}>
+              <Prompt />
+              <span className="term-caret" />
+            </div>
+          </div>
+
+          <div className="term-status">
+            <span className="ready">
+              <i /> ready
+            </span>
+            <span className="term-hover" style={{ color: hovered?.color }}>
+              {hovered ? `${hovered.name}  ·  ${groupOf[hovered.name]}` : "hover a tool • click to skip the typing"}
+            </span>
+            <span>{techBrands.length} tools</span>
+          </div>
+        </div>
       </div>
     </div>
   );
