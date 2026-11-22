@@ -47,14 +47,14 @@ Welcome to the personal portfolio of **Zeeshan Saeed** — software developer an
 
 ## 📜 Licenses & Certifications (10+)
 
-- Oracle Cloud Infrastructure Certified AI Foundation Associate
+- [Oracle Cloud Infrastructure Certified AI Foundation Associate](https://catalog-education.oracle.com/ords/certview/sharebadge?id=D9736F27568B9DCF0CD9348125D52972CD4235B2FB7007807A136F901E1CD2C1)
 - AWS Certified Machine Learning
 - Google Cloud AI
-- Microsoft Azure AI Essentials Professional Certificate (Microsoft & LinkedIn)
-- Generative AI Professional Certificate (Snowflake)
+- [Microsoft Azure AI Essentials Professional Certificate](https://www.linkedin.com/learning/certificates/06d69d5b104b470fedc5b6c45bbb7fac179a055a9d7c9e7d6cfbf6c6e7b58af4) (Microsoft & LinkedIn)
+- [Generative AI Professional Certificate](https://www.linkedin.com/learning/certificates/86618d304861dc809c0032d5e6929ae2f1ab6816aa755463ebcae1f9dfd2ed2d) (Snowflake)
 - Generative AI Foundation Certificate (Microsoft)
 - Deloitte Australia Data Analytics Job Simulation Certificate
-- AWS Cloud Practitioner Essentials
+- [AWS Cloud Practitioner Essentials](https://skillbuilder.aws/learn/94T2BEN85A/aws-cloud-practitioner-essentials/8D79F3AVR7) (course)
 - Generative AI Foundations Certificate (upGrad)
 - NPTEL Certifications
 - MERN Full-Stack Course (AccioJob)
