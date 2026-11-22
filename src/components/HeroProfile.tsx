@@ -16,7 +16,7 @@ const HeroProfile = () => {
     const progress = setProgress((value) => setLoading(value));
 
     const img = new Image();
-    img.src = "/images/profile.png";
+    img.src = "/images/profile.webp";
 
     const onImageReady = () => {
       progress.loaded().then(() => {
@@ -110,7 +110,7 @@ const HeroProfile = () => {
 
         <img
           ref={imgRef}
-          src="/images/profile.png"
+          src="/images/profile.webp"
           alt="Zeeshan Saeed"
           className="hero-profile-img"
           loading="eager"

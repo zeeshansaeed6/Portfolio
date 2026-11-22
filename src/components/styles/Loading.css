@@ -45,26 +45,34 @@
   --Lsize: 145px;
   padding: 6px;
   position: relative;
-  min-width: 0px;
-  min-height: 0px;
   border-radius: 100px;
-  background-color: #000;
   overflow: hidden;
-  transition: 0.8s ease-in-out;
-  transition-delay: 0.2s;
-  box-shadow: 0px 15px 15px 0px rgba(0, 0, 0, 0.2);
+  isolation: isolate;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/* The black pill is drawn by this layer. On exit it is scaled up to cover the
+   screen with a transform rather than by growing the box, so the intro
+   doesn't count as layout shift (CLS) and runs on the GPU. */
+.loading-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: #000;
+  box-shadow: 0px 15px 15px 0px rgba(0, 0, 0, 0.2);
+  transition: transform 0.8s ease-in-out 0.2s, box-shadow 0.8s ease-in-out 0.2s;
+}
 .loading-clicked {
+  overflow: visible;
+}
+.loading-clicked::after {
+  transform: scale(40, 30);
+  box-shadow: none;
   transition-delay: 0ms;
   transition-timing-function: cubic-bezier(0.33, 0.11, 1, 0.72);
-  transform: scale(1);
-  min-width: calc(100vw + 5000px);
-  border-radius: 5000px;
-  min-height: calc(100vh + 500px);
-  box-shadow: none;
 }
 .loading-clicked .loading-button {
   overflow: visible;
@@ -89,6 +97,7 @@
 .loading-clicked:hover .loading-hover,
 .loading-clicked .loading-hover {
   opacity: 0;
+  transition: none;
 }
 .loading-content {
   position: relative;

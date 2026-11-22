@@ -60,7 +60,7 @@
   font-size: 15px;
   line-height: 15px;
   font-weight: 600;
-  color: #5e5e5e;
+  color: #808080; /* 5:1 on the page background, readable per WCAG AA */
   cursor: pointer;
   transition: 0.5s;
   transform-origin: left bottom;

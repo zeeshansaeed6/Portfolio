@@ -14,7 +14,7 @@ export const projects: Project[] = [
     tools: ["Electron", "Chromium", "Node.js", "BM25 Indexing", "Gemini API", "Ollama", "Tor", "Express.js"],
     description:
       "Sovereign zero-telemetry private search engine & Chromium desktop browser suite featuring sub-5ms BM25 local indexing, isolated multi-tab proxy browsing, cited AI synthesis, and instant tools.",
-    image: "/images/aegis.jpg",
+    image: "/images/aegis.webp",
     link: "https://github.com/zeeshansaeed6/Aegis-Ultimate",
   },
   {
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     tools: ["Amazon Bedrock", "Model Context Protocol", "Alexa+", "TypeScript", "React 18", "Express.js"],
     description:
       "Voice-first developer chief of staff for Alexa+ powered by MCP and Amazon Bedrock (Nova Lite). Synthesizes spoken daily blocker briefings from GitHub PRs/CI builds and executes two-phase voice actions.",
-    image: "/images/project-standup-chief.jpg",
+    image: "/images/project-standup-chief.webp",
     link: "https://github.com/zeeshansaeed6/Standup-Chief-of-Staff",
   },
   {
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     tools: ["MERN Stack", "Stripe Escrow", "Multi-Currency", "Redux", "RBAC"],
     description:
       "Commercial-grade multi-vendor marketplace featuring Stripe 3D-secure escrow payments, item-level split vendor fulfillment, dynamic 9-currency conversion, and vendor management hubs.",
-    image: "/images/project-omnimarket.jpg",
+    image: "/images/project-omnimarket.webp",
     link: "https://github.com/zeeshansaeed6/E-CommWeb",
   },
   {
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     tools: ["MERN Stack", "Gemini Vision AI", "WebRTC", "Geolocation API"],
     description:
       "Multimodal AI vision suite for real-time snake species identification, venom risk triage scoring, low-light photo enhancement, and auto-dispatched GPS antivenom hospital routing.",
-    image: "/images/project-serpentai.jpg",
+    image: "/images/project-serpentai.webp",
     link: "https://github.com/zeeshansaeed6/SerpentAI-",
   },
   {
@@ -50,7 +50,7 @@ export const projects: Project[] = [
     tools: ["React 18", "JavaScript", "GitHub CLI (gh)", "DevOps CI/CD", "Webpack"],
     description:
       "Modern high-performance React SPA built with automated CI/CD DevOps workflows, programmatic branch & PR management via GitHub CLI, and auditable deployment scripting.",
-    image: "/images/project-react-devops.jpg",
+    image: "/images/project-react-devops.webp",
     link: "https://github.com/zeeshansaeed6/my-app",
   },
   {
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     tools: ["Vite", "Node.js", "Express.js", "Three.js", "Split Billing"],
     description:
       "Next-generation food delivery platform blending e-commerce with social dining, gamification, and WebGL 3D graphics. Features AI dining intelligence and an immersive 3D food inspector.",
-    image: "/images/project-fooddash.jpg",
+    image: "/images/project-fooddash.webp",
     link: "https://github.com/zeeshansaeed6/FoodDash",
   },
   {
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     tools: ["Python", "TensorFlow", "OpenCV", "Plotly", "CNNs"],
     description:
       "Deep learning CNN model classifying MRI scans for tumor presence with iterative model tuning. OpenCV preprocessing for noise reduction and interactive metric dashboards.",
-    image: "/images/project-braintumor.jpg",
+    image: "/images/project-braintumor.webp",
     link: "https://github.com/zeeshansaeed6/BrainTumorDetection",
   },
   {
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     tools: ["MERN Stack", "Twilio API", "MongoDB", "Node.js"],
     description:
       "Centralized Educational Resource Planning system digitizing student records, attendance, and administrative operations with automated Twilio SMS alert integration.",
-    image: "/images/project-collegeerp.jpg",
+    image: "/images/project-collegeerp.webp",
     link: "https://github.com/zeeshansaeed6/CollegeERP",
   },
 ];

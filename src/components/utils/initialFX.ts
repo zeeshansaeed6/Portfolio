@@ -52,7 +52,10 @@ export function initialFX() {
     console.warn("SplitText intro:", e);
   }
 
-  const TextProps = { type: "chars,lines", linesClass: "split-h2" };
+  // The two looping words are hidden from screen readers (the h2 carries an
+  // aria-label instead), because SplitText would otherwise put aria-label on
+  // plain divs, which ARIA doesn't allow.
+  const TextProps = { type: "chars,lines", linesClass: "split-h2", aria: "hidden" as const };
 
   try {
     if (document.querySelector(".landing-h2-1")) {
