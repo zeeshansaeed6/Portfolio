@@ -22,12 +22,6 @@ const Contact = () => {
                 <span>saeedzeeshan2003@gmail.com</span>
               </a>
             </p>
-            <h4>Phone</h4>
-            <p>
-              <a href="tel:+917569748912" data-cursor="disable">
-                +91 7569748912
-              </a>
-            </p>
             <h4>Location</h4>
             <p className="contact-location">
               Hyderabad, Telangana, India
