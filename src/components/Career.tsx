@@ -48,8 +48,8 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Data Analytics Intern</h4>
-                <h5>Deloitte Australia (Internship)</h5>
+                <h4>Data Analytics & Technology</h4>
+                <h5>Deloitte Australia (Job Simulation)</h5>
               </div>
               <h3>2025</h3>
             </div>
