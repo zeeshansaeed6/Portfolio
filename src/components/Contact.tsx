@@ -70,7 +70,7 @@ const Contact = () => {
             <h2>
               Designed and Developed <br /> by <span>Zeeshan Saeed</span>
             </h2>
-            <h5>
+            <h5 aria-level={3}>
               <MdCopyright /> 2026
             </h5>
           </div>

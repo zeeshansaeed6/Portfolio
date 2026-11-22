@@ -16,7 +16,7 @@ const Landing = ({ children }: PropsWithChildren) => {
               </h1>
             </div>
             <div className="landing-info">
-              <h3>Software</h3>
+              <h3 aria-level={2}>Software</h3>
               <h2 className="landing-info-h2" aria-label="Engineer and Developer">
                 <div className="landing-h2-1">Engineer</div>
                 <div className="landing-h2-2">Developer</div>

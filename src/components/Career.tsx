@@ -36,8 +36,8 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Full-Stack & AI Developer</h4>
-                <h5>Production Projects & AccioJob</h5>
+                <h4 aria-level={3}>Full-Stack & AI Developer</h4>
+                <h5 aria-level={4}>Production Projects & AccioJob</h5>
               </div>
               <h3>NOW</h3>
             </div>
@@ -48,8 +48,8 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Data Analytics & Technology</h4>
-                <h5>Deloitte Australia (Job Simulation)</h5>
+                <h4 aria-level={3}>Data Analytics & Technology</h4>
+                <h5 aria-level={4}>Deloitte Australia (Job Simulation)</h5>
               </div>
               <h3>2025</h3>
             </div>
@@ -60,8 +60,8 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Bachelor's Degree</h4>
-                <h5>Osmania University (Sem 5)</h5>
+                <h4 aria-level={3}>Bachelor's Degree</h4>
+                <h5 aria-level={4}>Osmania University (Sem 5)</h5>
               </div>
               <h3>2024</h3>
             </div>

@@ -68,7 +68,7 @@ a.contact-social {
   line-height: 20px;
   display: flex;
   gap: 10px;
-  opacity: 0.5;
+  opacity: 0.55; /* 5.2:1 contrast; 0.5 sat right on the 4.5:1 limit */
 }
 @media only screen and (max-width: 1600px) {
   .contact-section h3 {
