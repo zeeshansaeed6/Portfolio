@@ -36,13 +36,13 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4 aria-level={3}>Full-Stack & AI Developer</h4>
-                <h5 aria-level={4}>Production Projects & AccioJob</h5>
+                <h4 aria-level={3}>Software Developer Intern</h4>
+                <h5 aria-level={4}>AccioJob</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Engineered and shipped 5+ production-style full-stack and ML applications, including a multi-user food delivery platform with synchronized split billing, an MRI brain tumor CNN classifier with OpenCV, and CollegeERP with Twilio API.
+              Built 14+ REST endpoints in Node.js and Express with JWT authentication and role-based access control, cut average API latency by 32% by reworking MongoDB aggregation pipelines and indexes, and built modular React workflows with custom hooks and shared state.
             </p>
           </div>
           <div className="career-info-box">
