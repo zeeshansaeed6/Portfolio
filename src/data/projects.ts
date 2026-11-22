@@ -27,6 +27,15 @@ export const projects: Project[] = [
     link: "https://github.com/zeeshansaeed6/Standup-Chief-of-Staff",
   },
   {
+    name: "IntentLock",
+    category: "AI Agent & Fintech",
+    tools: ["React", "TypeScript", "Express 5", "Airwallex API", "Zod", "Vitest"],
+    description:
+      "Purchase agent built for the Airwallex Agentic Banking Hackathon: an LLM proposes a purchase, deterministic code signs it as an HMAC contract, and a virtual card is issued that can pay for that purchase only. 60 passing tests.",
+    image: "/images/project-intentlock.webp",
+    link: "https://github.com/zeeshansaeed6/IntentLock",
+  },
+  {
     name: "OmniMarket",
     category: "MERN Multi-Vendor Hub",
     tools: ["MERN Stack", "Stripe Escrow", "Multi-Currency", "Redux", "RBAC"],
@@ -34,6 +43,24 @@ export const projects: Project[] = [
       "Commercial-grade multi-vendor marketplace featuring Stripe 3D-secure escrow payments, item-level split vendor fulfillment, dynamic 9-currency conversion, and vendor management hubs.",
     image: "/images/project-omnimarket.webp",
     link: "https://github.com/zeeshansaeed6/E-CommWeb",
+  },
+  {
+    name: "Zoffice",
+    category: "Offline Desktop Office Suite",
+    tools: ["Electron", "React 19", "Vite", "SQLite"],
+    description:
+      "Offline-first desktop office suite for documents, spreadsheets and slides, with .docx, .xlsx and .pptx support. No accounts or telemetry, six languages including Hindi and Urdu, and WCAG 2.1 AA accessibility.",
+    image: "/images/project-zoffice.webp",
+    link: "https://github.com/zeeshansaeed6/Zoffice",
+  },
+  {
+    name: "StockFlow",
+    category: "Multi-Tenant SaaS Inventory",
+    tools: ["React 18", "Vite", "Tailwind CSS", "Express", "MongoDB", "JWT"],
+    description:
+      "Multi-tenant inventory app where every organization's data is fully isolated: products, stock levels, suppliers, low-stock alerts, reports and a stock-movement history. Built as a 6-hour MVP, then extended.",
+    image: "/images/project-stockflow.webp",
+    link: "https://github.com/zeeshansaeed6/stockflow-inventory-mvp",
   },
   {
     name: "SerpentAI Ultra",
@@ -61,6 +88,15 @@ export const projects: Project[] = [
       "Next-generation food delivery platform blending e-commerce with social dining, gamification, and WebGL 3D graphics. Features AI dining intelligence and an immersive 3D food inspector.",
     image: "/images/project-fooddash.webp",
     link: "https://github.com/zeeshansaeed6/FoodDash",
+  },
+  {
+    name: "Healthcare Backend API",
+    category: "REST API & Backend",
+    tools: ["Django", "Django REST Framework", "PostgreSQL", "JWT", "Docker"],
+    description:
+      "REST API for a healthcare app: users manage their own patients and a shared list of doctors, and assign doctors to patients. JWT authentication, private patient records, and every endpoint protected by default.",
+    image: "/images/project-whatbytes.webp",
+    link: "https://github.com/zeeshansaeed6/whatbytes",
   },
   {
     name: "Brain Tumor Detection",
