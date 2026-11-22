@@ -29,6 +29,9 @@ export default function setSplitText() {
     para.split = new SplitText(para, {
       type: "lines,words",
       linesClass: "split-line",
+      // Split into whole words, so screen readers can read the text as is;
+      // an aria-label isn't allowed on a <p>.
+      aria: "none",
     });
 
     para.anim = gsap.fromTo(

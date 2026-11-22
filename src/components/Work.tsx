@@ -7,11 +7,21 @@ import { projects } from "../data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Project images come in a 480px and a 720px version; cards show them at
+// about 400px wide (nearly full width on phones).
+const PROJECT_IMAGE_SIZES = "(max-width: 600px) 90vw, 400px";
+const projectSrcSet = (image: string) =>
+  `${image.replace(/\.webp$/, "-480.webp")} 480w, ${image} 720w`;
+
 const Work = () => {
   useEffect(() => {
     // Preload project images into browser memory cache for zero scroll latency
     projects.forEach((p) => {
       const img = new Image();
+      // Same candidates as the card <img>, so the preload fetches the size
+      // the card will actually use.
+      img.sizes = PROJECT_IMAGE_SIZES;
+      img.srcset = projectSrcSet(p.image);
       img.src = p.image;
     });
 
@@ -146,6 +156,8 @@ const Work = () => {
                 >
                   <img
                     src={project.image}
+                    srcSet={projectSrcSet(project.image)}
+                    sizes={PROJECT_IMAGE_SIZES}
                     alt={project.name}
                     width="400"
                     height="175"

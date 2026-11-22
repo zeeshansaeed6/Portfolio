@@ -111,6 +111,8 @@ const HeroProfile = () => {
         <img
           ref={imgRef}
           src="/images/profile.webp"
+          width={500}
+          height={500}
           alt="Zeeshan Saeed"
           className="hero-profile-img"
           loading="eager"
