@@ -54,6 +54,12 @@ Welcome to the personal portfolio of **Zeeshan Saeed** — software developer an
 - [Generative AI Professional Certificate](https://www.linkedin.com/learning/certificates/86618d304861dc809c0032d5e6929ae2f1ab6816aa755463ebcae1f9dfd2ed2d) (Snowflake)
 - Generative AI Foundation Certificate (Microsoft)
 - Deloitte Australia Data Analytics Job Simulation Certificate
+- [Deloitte Australia Technology Job Simulation](https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/udmxiyHeqYQLkTPvf_9PBTqmSxAf6zZTseP_ippeEcXucZg6c6PkW_1792569668478_completion_certificate.pdf) (Forage)
+- [Advanced Software Engineering Job Simulation, Walmart USA](https://www.theforage.com/completion-certificates/prBZoAihniNijyD6d/oX6f9BbCL9kJDJzfg_prBZoAihniNijyD6d_ippeEcXucZg6c6PkW_1792133744149_completion_certificate.pdf) (Forage)
+- [Software Engineering Job Simulation, BlackBird](https://www.theforage.com/completion-certificates/nWHPnWj8YqGJh5kQB/8XSySTLv68WYeFhke_nWHPnWj8YqGJh5kQB_ippeEcXucZg6c6PkW_1792581563410_completion_certificate.pdf) (Forage)
+- [Software Engineer](https://www.hackerrank.com/certificates/7c6991d9ae07) (HackerRank)
+- [Software Engineer Intern](https://www.hackerrank.com/certificates/cd822a671276) (HackerRank)
+- [Problem Solving (Intermediate)](https://www.hackerrank.com/certificates/ebdd4035ec3f) (HackerRank)
 - [AWS Cloud Practitioner Essentials](https://skillbuilder.aws/learn/94T2BEN85A/aws-cloud-practitioner-essentials/8D79F3AVR7) (course)
 - Generative AI Foundations Certificate (upGrad)
 - NPTEL Certifications
