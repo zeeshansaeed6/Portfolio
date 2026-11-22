@@ -13,7 +13,7 @@ export const projects: Project[] = [
     category: "Zero-Telemetry Browser & Search",
     tools: ["Electron", "Chromium", "Node.js", "BM25 Indexing", "Gemini API", "Ollama", "Tor", "Express.js"],
     description:
-      "Sovereign zero-telemetry private search engine & Chromium desktop browser suite featuring sub-5ms BM25 local indexing, isolated multi-tab proxy browsing, cited AI synthesis, and instant tools.",
+      "Private search engine and Chromium desktop browser that keeps your data on your machine: BM25 search in under 5 ms, isolated proxy tabs, AI answers that cite their sources, and built-in instant tools.",
     image: "/images/aegis.webp",
     link: "https://github.com/zeeshansaeed6/Aegis-Ultimate",
   },
@@ -22,7 +22,7 @@ export const projects: Project[] = [
     category: "Voice AI & Alexa+ MCP Server",
     tools: ["Amazon Bedrock", "Model Context Protocol", "Alexa+", "TypeScript", "React 18", "Express.js"],
     description:
-      "Voice-first developer chief of staff for Alexa+ powered by MCP and Amazon Bedrock (Nova Lite). Synthesizes spoken daily blocker briefings from GitHub PRs/CI builds and executes two-phase voice actions.",
+      "Voice assistant for developers on Alexa+, built with MCP and Amazon Bedrock (Nova Lite). Turns GitHub pull requests and CI builds into a spoken daily briefing of what's blocking you, and asks you to confirm before it acts on a voice command.",
     image: "/images/project-standup-chief.webp",
     link: "https://github.com/zeeshansaeed6/Standup-Chief-of-Staff",
   },
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     category: "MERN Multi-Vendor Hub",
     tools: ["MERN Stack", "Stripe Escrow", "Multi-Currency", "Redux", "RBAC"],
     description:
-      "Commercial-grade multi-vendor marketplace featuring Stripe 3D-secure escrow payments, item-level split vendor fulfillment, dynamic 9-currency conversion, and vendor management hubs.",
+      "Multi-vendor marketplace with Stripe 3D Secure escrow payments, fulfilment split by item across vendors, prices in 9 currencies, and dashboards for vendors to manage their stores.",
     image: "/images/project-omnimarket.webp",
     link: "https://github.com/zeeshansaeed6/E-CommWeb",
   },
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     category: "Multimodal AI & HealthTech",
     tools: ["MERN Stack", "Gemini Vision AI", "WebRTC", "Geolocation API"],
     description:
-      "Multimodal AI vision suite for real-time snake species identification, venom risk triage scoring, low-light photo enhancement, and auto-dispatched GPS antivenom hospital routing.",
+      "Identifies snake species from a photo in real time, scores the venom risk, enhances low-light photos, and uses GPS to route you to the nearest hospital with antivenom.",
     image: "/images/project-serpentai.webp",
     link: "https://github.com/zeeshansaeed6/SerpentAI-",
   },
@@ -76,7 +76,7 @@ export const projects: Project[] = [
     category: "React & Automated DevOps",
     tools: ["React 18", "JavaScript", "GitHub CLI (gh)", "DevOps CI/CD", "Webpack"],
     description:
-      "Modern high-performance React SPA built with automated CI/CD DevOps workflows, programmatic branch & PR management via GitHub CLI, and auditable deployment scripting.",
+      "React single-page app with an automated CI/CD pipeline: branches and pull requests are managed with the GitHub CLI, and deployments run from scripts that log every step.",
     image: "/images/project-react-devops.webp",
     link: "https://github.com/zeeshansaeed6/my-app",
   },
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     category: "Food Delivery & Social Dining",
     tools: ["Vite", "Node.js", "Express.js", "Three.js", "Split Billing"],
     description:
-      "Next-generation food delivery platform blending e-commerce with social dining, gamification, and WebGL 3D graphics. Features AI dining intelligence and an immersive 3D food inspector.",
+      "Food delivery platform that adds social dining and gamification to ordering, with WebGL 3D graphics, AI dining suggestions, and a 3D viewer for inspecting dishes.",
     image: "/images/project-fooddash.webp",
     link: "https://github.com/zeeshansaeed6/FoodDash",
   },
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     category: "AI & Computer Vision",
     tools: ["Python", "TensorFlow", "OpenCV", "Plotly", "CNNs"],
     description:
-      "Deep learning CNN model classifying MRI scans for tumor presence with iterative model tuning. OpenCV preprocessing for noise reduction and interactive metric dashboards.",
+      "CNN that classifies MRI scans for tumors, tuned over several training rounds, with OpenCV preprocessing to reduce noise and interactive dashboards for the model's metrics.",
     image: "/images/project-braintumor.webp",
     link: "https://github.com/zeeshansaeed6/BrainTumorDetection",
   },
@@ -112,7 +112,7 @@ export const projects: Project[] = [
     category: "ERP & Automation",
     tools: ["MERN Stack", "Twilio API", "MongoDB", "Node.js"],
     description:
-      "Centralized Educational Resource Planning system digitizing student records, attendance, and administrative operations with automated Twilio SMS alert integration.",
+      "College management system that digitizes student records, attendance and admin work, and sends automatic SMS alerts through Twilio.",
     image: "/images/project-collegeerp.webp",
     link: "https://github.com/zeeshansaeed6/CollegeERP",
   },
