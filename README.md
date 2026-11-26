@@ -2,6 +2,8 @@
 
 Welcome to the personal portfolio of **Zeeshan Saeed** — software developer and GenAI engineer, currently a Software Developer Intern at AccioJob, passionate about building next-generation web applications, full-stack systems, Generative AI integration, and algorithmic problem-solving.
 
+![Portfolio landing screen](docs/screenshots/hero.jpg)
+
 ---
 
 ## 👨‍💻 About Me
